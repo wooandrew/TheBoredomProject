@@ -1,0 +1,78 @@
+Completed.
+Time taken: 2 days
+
+TODO:
+
+TicTacToe, just original
+
+Draw X, O
+Draw ICON
+Music?
+
+No need for options
+
+DESIGN:
+
+
+CONCEPT1:
+X Score:            |   |            O Score:
+                ----|---|----
+                    |   |
+                ----|---|----
+                    |   |
+
+CONCEPT2:
+X Score:            |   |
+O Score:        ----|---|----
+                    |   |
+                ----|---|----
+                    |   |
+
+CONCEPT3:
+                    |   |
+                ----|---|----
+                    |   |
+X Score:        ----|---|----
+O Score:            |   |
+
+CONCEPT4:
+                    |   |
+                ----|---|----
+                    |   |
+                ----|---|----
+                    |   |
+
+          X Score: 0     O Score: 0
+
+
+scorescenario_0 = [1, 1, 1,
+                   0, 0, 0,
+                   0, 0, 0]
+
+scorescenario_1 = [0, 0, 0,
+                   1, 1, 1,
+                   0, 0, 0]
+
+scorescenario_2 = [0, 0, 0,
+                   0, 0, 0,
+                   1, 1, 1]
+
+scorescenario_3 = [1, 0, 0,
+                   1, 0, 0,
+                   1, 0, 0]
+
+scorescenario_4 = [0, 1, 0,
+                   0, 1, 0,
+                   0, 1, 0]
+
+scorescenario_5 = [0, 0, 1,
+                   0, 0, 1,
+                   0, 0, 1]
+
+scorescenario_6 = [1, 0, 0,
+                   0, 1, 0,
+                   0, 0, 1]
+
+scorescenario_7 = [0, 0, 1,
+                   0, 1, 0,
+                   1, 0, 0]
