@@ -1,4 +1,4 @@
-<img sytle="width:100%" src="https://www.dropbox.com/s/moco159cewwdijb/theboredomproject.png?raw=1" />
+<img sytle="width:100%" src="https://www.dropbox.com/s/itwme770e4i8rep/theboredomproject_pong.png?raw=1" />
 
 <div style="width:100%;display:flex;justify-content:center;">
 <a src="https://wooandrew.github.io/projects/theboredomproject/theboredomproject.htm"><img alt="Website" src="https://img.shields.io/website/https/wooandrew.github.io/projects/theboredomproject/theboredomproject.htm.svg"></a>
