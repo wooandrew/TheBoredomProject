@@ -11,18 +11,18 @@
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wooandrew/TheBoredomProject.svg">
 </div>
 
-# The Boredom Project: Pong
-The Boredom Project: Pong is my poor attempt to recreate Atari's arcade game 'Pong.' This project may get updates in the future, but nothing is guaranteed.
+# The Boredom Project: Tic Tac Toe
+The Boredom Project: Tic Tac Toe is my recreation of the classic "X" and "O" game. This project is no longer subject to updates, and thus will not recieve updates.
 
-|Project    |Language                                                     |Status                                                      |Updates?                                                 |GitHub Release?                                          |
-|:---------:|:-----------------------------------------------------------:|:----------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|
-|Pong       |![python](https://img.shields.io/badge/-Python-%233572a5.svg)|![done](https://img.shields.io/badge/-Done-success.svg)     |![maybe](https://img.shields.io/badge/-Maybe-yellow.svg) |![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|
+|Project    |Language                                                     |Status                                                      |Updates?                                  |GitHub Release?                                          ||
+|:---------:|:-----------------------------------------------------------:|:-----------------------------------------------------:|:---------------------------------------------:|:-------------------------------------------------------:||
+|Tic Tac Toe|![python](https://img.shields.io/badge/-Python-%233572a5.svg)|![done](https://img.shields.io/badge/-Done-success.svg)|![no](https://img.shields.io/badge/-No-red.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|-> Tag v1.0-tictactoe|
 
 ### Disclaimer
 These projects are BOREDOM inspired projects. So, depending on how bored I am, I may pump out several projects in a week. I might also be pre-occupied and not post a single project in several months (or years). So don't go expecting to see new stuff every month or even every day. Also, none of the projects here are subject to updates or bug fixes. I MAY fix bugs or add features, but don't count on it. OK, I'm done rambling. Check out my Boredom Projects, and for the love of something, use proper grammar.
 
 ## License
-<a rel="license" href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://cloud.githubusercontent.com/assets/5456665/18950087/fbe0681a-865f-11e6-9552-e59d038d5913.png" width="60em" height=auto/></a><br/><a href="https://github.com/wooandrew/TheBoredomProject/tree/Pong">The Boredom Project: Pong</a> is licensed under <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+<a rel="license" href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://cloud.githubusercontent.com/assets/5456665/18950087/fbe0681a-865f-11e6-9552-e59d038d5913.png" width="60em" height=auto/></a><br/><a href="https://github.com/wooandrew/TheBoredomProject/tree/Tic-Tac-Toe">The Boredom Project: Tic Tac Toe</a> is licensed under <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
 ```
 MIT License
 
