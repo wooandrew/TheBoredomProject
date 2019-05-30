@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TicTacToe", "TicTacToe\TicTacToe.pyproj", "{6F92B0A0-B263-4675-9110-02608081802F}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Battleship", "Battleship\Battleship.vcxproj", "{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}"
-EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Pong", "Pong\Pong.pyproj", "{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Battleship", "Battleship\Battleship.vcxproj", "{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +25,12 @@ Global
 		{6F92B0A0-B263-4675-9110-02608081802F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F92B0A0-B263-4675-9110-02608081802F}.Release|x64.ActiveCfg = Release|Any CPU
 		{6F92B0A0-B263-4675-9110-02608081802F}.Release|x86.ActiveCfg = Release|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|x64.ActiveCfg = Release|Any CPU
+		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|x86.ActiveCfg = Release|Any CPU
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Debug|x64.ActiveCfg = Debug|x64
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Debug|x64.Build.0 = Debug|x64
@@ -35,12 +41,6 @@ Global
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Release|x64.Build.0 = Release|x64
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Release|x86.ActiveCfg = Release|Win32
 		{614FE61B-349A-4C0C-A111-AC9C2A52CEF2}.Release|x86.Build.0 = Release|Win32
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|x64.ActiveCfg = Release|Any CPU
-		{D24C4E6E-F918-4F22-AA3C-E4DE492B70AB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
