@@ -1,4 +1,4 @@
-<img sytle="width:100%" src="https://www.dropbox.com/s/moco159cewwdijb/theboredomproject.png?raw=1" />
+<img sytle="width:100%" src="https://www.dropbox.com/s/gbhv9aav4ny8qbc/theboredomproject_ttt.png?raw=1" />
 
 <div style="width:100%;display:flex;justify-content:center;">
 <a src="https://wooandrew.github.io/projects/theboredomproject/theboredomproject.htm"><img alt="Website" src="https://img.shields.io/website/https/wooandrew.github.io/projects/theboredomproject/theboredomproject.htm.svg"></a>
@@ -12,10 +12,10 @@
 </div>
 
 # The Boredom Project: Tic Tac Toe
-The Boredom Project: Tic Tac Toe is my recreation of the classic "X" and "O" game. This project is no longer subject to updates, and thus will not recieve updates.
+`The Boredom Project: Tic Tac Toe` is my recreation of the classic "X" and "O" game. This project is no longer subject to updates, and thus will not recieve updates.
 
-|Project    |Language                                                     |Status                                                      |Updates?                                  |GitHub Release?                                          ||
-|:---------:|:-----------------------------------------------------------:|:-----------------------------------------------------:|:---------------------------------------------:|:-------------------------------------------------------:|:-:|
+|Project    |Language                                                     |Status                                                      |Updates?                                  |GitHub Release?                                          |                        |
+|:---------:|:-----------------------------------------------------------:|:-----------------------------------------------------:|:---------------------------------------------:|:-------------------------------------------------------:|:----------------------:|
 |Tic Tac Toe|![python](https://img.shields.io/badge/-Python-%233572a5.svg)|![done](https://img.shields.io/badge/-Done-success.svg)|![no](https://img.shields.io/badge/-No-red.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|`-> Tag: v1.0-tictactoe`|
 
 ### Disclaimer
