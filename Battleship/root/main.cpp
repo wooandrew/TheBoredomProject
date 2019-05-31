@@ -2,11 +2,11 @@
 // Email: seungminleader@gmail.com
 // Website: https://wooandrew.github.io
 
-#include <iostream>
+#include "lib.h"
 
 int main() {
 
-	std::cout << "Hello World!" << std::endl;
+	std::cout << "Hello World! -> " << GetDateTime() << " put_time" << std::endl;
 
 	return 0;
 }

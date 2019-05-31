@@ -12,7 +12,7 @@
 </div>
 
 # The Boredom Project
-The Boredom Project is just as the name suggests: a project, or a multitude of projects, born from boredom. Everything on this website is spontaneous, random, and probably small, unlike many of the project on the main website. In other words, it's the result of a 17-year-old without friends or a life.
+The Boredom Project is just as the name suggests: a project, or a multitude of projects, born from boredom. Everything here is spontaneous, random, and probably small, unlike many of my other projects. In other words, it's the result of a 17-year-old without friends or a life.
 
 |Project    |Language                                                     |Status                                                      |Updates?                                                 |GitHub Release?                                          |                        |
 |:---------:|:-----------------------------------------------------------:|:----------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|:----------------------:|

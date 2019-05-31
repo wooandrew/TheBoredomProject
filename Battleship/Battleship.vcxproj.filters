@@ -18,5 +18,16 @@
     <ClCompile Include="root\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="root\misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="root\lib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\misc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
