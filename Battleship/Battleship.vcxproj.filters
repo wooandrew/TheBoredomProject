@@ -21,6 +21,21 @@
     <ClCompile Include="root\misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="root\Engine\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Engine\Graphics\graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Engine\Graphics\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Graphics\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Graphics\sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="root\lib.h">
@@ -29,5 +44,29 @@
     <ClInclude Include="root\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="root\Engine\engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Engine\Graphics\graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Engine\Graphics\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Graphics\texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Graphics\sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="root\glew32.dll" />
+    <None Include="root\glfw3.dll" />
+    <None Include="root\fragmentcore.glsl" />
+    <None Include="root\vertexcore.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="errorcodes.txt" />
   </ItemGroup>
 </Project>

@@ -12,6 +12,13 @@
 #include <iomanip>
 #include <sstream>
 
-std::string GetDateTime();
+class Misc {
+
+public:
+	
+	Misc() = delete;
+	static std::string GetDateTime();
+};
+
 
 #endif // !MISC_FUNCTIONS

@@ -17,10 +17,6 @@
 #include <GLM/src/glm.hpp>
 #include <GLM/src/vec2.hpp>
 #include <GLM/src/vec3.hpp>
-#include <GLM/src/vec4.hpp>
-#include <GLM/src/mat4x4.hpp>
-#include <GLM/src/gtc/matrix_transform.hpp>
-#include <GLM/src/gtc/type_ptr.hpp>
 
 #include <SOIL2/src/SOIL2.h>
 

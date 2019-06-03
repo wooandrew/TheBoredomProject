@@ -4,14 +4,14 @@
 
 #include "misc.h"
 
-std::string GetDateTime() {
+std::string Misc::GetDateTime() {
 
 	auto timeNow = std::chrono::system_clock::now();
 	time_t timeNow_t = std::chrono::system_clock::to_time_t(timeNow);
 
-	#pragma warning(disable: 4996)
+	#pragma warning(disable: 4996)	// MSVC only -> "std::localtime" is considered unsafe, uses localtime_s instead.
 	std::stringstream toString;
-	toString << std::put_time(std::localtime(&timeNow_t), "%Y/%m/%d @ %T");
+	toString << std::put_time(std::localtime(&timeNow_t), "%Y/%m/%d _ %T");
 
 	return toString.str();
 }

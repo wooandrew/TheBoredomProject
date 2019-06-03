@@ -1,0 +1,17 @@
+Error Codes (c) Andrew Woo, 2019
+Website: https://wooandrew.github.io/
+Email: seungminleader@gmail.com
+
+::: Error codes for "game" projects using OpenGL, GLFW, GLEW, GLM, SOIL
+
+x : undesignated
+e : engine
+g : graphics
+t : textures
+
+xyz [000 to 999] -> Unique Identifier, by order of appearance in hardcode
+
+DESIGNATION
+Return Code:  0 |             -> Terminated with no errors
+Return Code: -1 | Fatal Error -> Significant error, terminate process
+Return Code: nr | Error       -> Insignificant error, continue process
