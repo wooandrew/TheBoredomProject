@@ -7,6 +7,7 @@
 #define VEC3_EMPTY		glm::vec3()
 #define VEC3_VALUE1		glm::vec3(1)
 
+
 Sprite::Sprite() {
 
 	texture = Texture();
@@ -17,12 +18,10 @@ Sprite::Sprite() {
 	size = VEC3_EMPTY;
 	scale = VEC3_VALUE1;
 
-	bFlip = false;
+	flip = false;
 }
-Sprite::~Sprite() {}
 
 Sprite::Sprite(std::string path) : Sprite() {
-
 	texture = Texture(path);
 	size = glm::vec3(static_cast<float>(texture.GetWidth()), static_cast<float>(texture.GetHeight()), 1);
 }
@@ -40,7 +39,7 @@ Sprite::Sprite(std::string path, glm::vec3 _position, glm::vec3 _scale) : Sprite
 	scale = _scale;
 }
 
-void Sprite::flip(bool _flip) { bFlip = _flip; }
+void Sprite::Flip(bool _flip) { flip = _flip; }
 
 void Sprite::Update() const {}
 
@@ -61,14 +60,14 @@ void Sprite::Render() const {
 	// Rendering
 	glColor4f(1, 1, 1, 1);
 
-	if (bFlip) {
+	if (flip) {
 
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(0, 0);				glVertex2i(texture.GetWidth() / 2, -texture.GetHeight() / 2);
+			glTexCoord2f(0, 0);				glVertex2i( texture.GetWidth() / 2, -texture.GetHeight() / 2);
 			glTexCoord2f(1, 0);				glVertex2i(-texture.GetWidth() / 2, -texture.GetHeight() / 2);
-			glTexCoord2f(1, 1);				glVertex2i(-texture.GetWidth() / 2, texture.GetHeight() / 2);
-			glTexCoord2f(0, 1);				glVertex2i(texture.GetWidth() / 2, texture.GetHeight() / 2);
+			glTexCoord2f(1, 1);				glVertex2i(-texture.GetWidth() / 2,  texture.GetHeight() / 2);
+			glTexCoord2f(0, 1);				glVertex2i( texture.GetWidth() / 2,  texture.GetHeight() / 2);
 		}
 		glEnd();
 	}
@@ -77,9 +76,9 @@ void Sprite::Render() const {
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(0, 0);				glVertex2i(-texture.GetWidth() / 2, -texture.GetHeight() / 2);
-			glTexCoord2f(1, 0);				glVertex2i(texture.GetWidth() / 2, -texture.GetHeight() / 2);
-			glTexCoord2f(1, 1);				glVertex2i(texture.GetWidth() / 2, texture.GetHeight() / 2);
-			glTexCoord2f(0, 1);				glVertex2i(-texture.GetWidth() / 2, texture.GetHeight() / 2);
+			glTexCoord2f(1, 0);				glVertex2i( texture.GetWidth() / 2, -texture.GetHeight() / 2);
+			glTexCoord2f(1, 1);				glVertex2i( texture.GetWidth() / 2,  texture.GetHeight() / 2);
+			glTexCoord2f(0, 1);				glVertex2i(-texture.GetWidth() / 2,  texture.GetHeight() / 2);
 		}
 		glEnd();
 	}
@@ -88,14 +87,13 @@ void Sprite::Render() const {
 	glDisable(GL_TEXTURE_2D);
 }
 
+
 void Sprite::SetPosition(glm::vec3 _position) {
 	position = _position;
 }
-
-void Sprite::SetRotation(float _rotation) {
+void Sprite::RotateTo(float _rotation) {
 	rotation = _rotation;
 }
-
 void Sprite::SetScale(float _scale) {
 	scale.x = _scale;
 	scale.y = _scale;
@@ -105,6 +103,7 @@ void Sprite::SetScale(glm::vec3 _scale) {
 	scale = _scale;
 }
 
+// Return PRIVATE values
 float* Sprite::GetRotation() { return &rotation; }
 glm::vec3* Sprite::GetPosition() { return &position; }
 glm::vec3* Sprite::GetScale() { return &scale; }

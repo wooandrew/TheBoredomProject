@@ -4,8 +4,8 @@
 
 #pragma once
 
-#ifndef SPRITE
-#define SPRITE
+#ifndef GRAPHICS_SPRITE
+#define GRAPHICS_SPRITE
 
 #include "../lib.h"
 #include "texture.h"
@@ -19,15 +19,16 @@ public:
 	Sprite(std::string path, glm::vec3 _position);
 	Sprite(std::string path, glm::vec3 _position, float _scale);
 	Sprite(std::string path, glm::vec3 _position, glm::vec3 _scale);
-	virtual ~Sprite();
-
-	void flip(bool _flip = false);
+	
+	void Flip(bool _flip = false);
 
 	void Update() const;
 	void Render() const;
 
 	void SetPosition(glm::vec3 _position);
-	void SetRotation(float _rotation);
+
+	void RotateTo(float _rotation);
+
 	void SetScale(float _scale);
 	void SetScale(glm::vec3 _scale);
 
@@ -46,8 +47,7 @@ private:
 	glm::vec3 scale;
 	glm::vec3 size;
 
-	bool bFlip;
+	bool flip;
 };
 
-#endif // !SPRITE
-
+#endif // !GRAPHICS_SPRITE

@@ -1,43 +1,43 @@
 // TheBoredomProject: Battleship (c) Andrew Woo, 2019
-// Website: https://wooandrew.github.io/
 // Email: seungminleader@gmail.com
+// Website: https://wooandrew.github.io
 
 #include "texture.h"
 
 Texture::Texture() {
+	
 	id = -1;
 	textureWidth = 0;
 	textureHeight = 0;
 }
-Texture::~Texture() {}
 
-Texture::Texture(int _id) {
-
-	textureWidth = 0;
-	textureHeight = 0;
-
+Texture::Texture(int _id) : Texture() {
+	
 	id = _id;
 
 	if (!GetTextureParams()) {
-		std::cerr << Misc::GetDateTime() << " |000t| Error: Failed to get Texture Parameters [GetTextureParams() = false]." << std::endl;
+		Misc::Logger("000t", "Error: Failed to get Texture parameters [GetTextureParams() = false].");
 	}
 	else {
-		std::cerr << Misc::GetDateTime() << " |001t| Successfully acquired Texture Parameters [GetTextureParams() = true]." << std::endl;
+		Misc::Logger("001t", "Successfully acquired Texture parameters [GetTextureParams() = true].");
 	}
 }
 
-Texture::Texture(std::string path) {
-
-	textureWidth = 0;
-	textureHeight = 0;
+Texture::Texture(std::string path) : Texture() {
 
 	id = SOIL_load_OGL_texture(path.c_str(), SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MULTIPLY_ALPHA | SOIL_FLAG_INVERT_Y);
 
 	if (!GetTextureParams()) {
-		std::cerr << Misc::GetDateTime() << " |002t| Error: Failed to get Texture Parameters [GetTextureParams() = false]." << std::endl;
+
+		std::stringstream stream;
+		stream << "Error: Failed to load asset from[" << path << "] ___[GetTextureParams() = false].";
+		Misc::Logger("002t", stream.str());
 	}
 	else {
-		std::cerr << Misc::GetDateTime() << " |003t| Successfully acquired Texture Parameters [GetTextureParams() = true]." << std::endl;
+
+		std::stringstream stream;
+		stream << "Successfully loaded asset from [" << path << "] ___ [GetTextureParams() = true].";
+		Misc::Logger("003t", stream.str());
 	}
 }
 

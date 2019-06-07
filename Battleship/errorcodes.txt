@@ -8,6 +8,7 @@ x : undesignated
 e : engine
 g : graphics
 t : textures
+c : TCP/IP connection
 
 xyz [000 to 999] -> Unique Identifier, by order of appearance in hardcode
 

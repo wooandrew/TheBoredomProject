@@ -7,9 +7,15 @@
 #ifndef LIB_INCLUDE
 #define LIB_INCLUDE
 
+#include <WS2tcpip.h>
+
 #include <iostream>
+#include <functional>
+#include <future>
 #include <string>
+#include <sstream>
 #include <fstream>
+#include <thread>
 
 #include <GLEW/src/glew.h>
 #include <GLFW/src/glfw3.h>
@@ -20,6 +26,6 @@
 
 #include <SOIL2/src/SOIL2.h>
 
-#include "misc.h"
+#include "misc/misc.h"
 
 #endif // !LIB_INCLUDE

@@ -93,10 +93,11 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -108,10 +109,11 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -125,12 +127,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -144,38 +147,37 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="root\Connect\connect.cpp" />
     <ClCompile Include="root\Engine\engine.cpp" />
-    <ClCompile Include="root\Engine\Graphics\graphics.cpp" />
+    <ClCompile Include="root\Engine\Input\mouse.cpp" />
     <ClCompile Include="root\Graphics\sprite.cpp" />
     <ClCompile Include="root\Graphics\texture.cpp" />
     <ClCompile Include="root\main.cpp" />
-    <ClCompile Include="root\misc.cpp" />
-    <ClCompile Include="root\Engine\Graphics\texture.cpp" />
+    <ClCompile Include="root\misc\misc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="root\Connect\connect.h" />
     <ClInclude Include="root\Engine\engine.h" />
-    <ClInclude Include="root\Engine\Graphics\graphics.h" />
+    <ClInclude Include="root\Engine\Input\mouse.h" />
     <ClInclude Include="root\Graphics\sprite.h" />
     <ClInclude Include="root\Graphics\texture.h" />
     <ClInclude Include="root\lib.h" />
-    <ClInclude Include="root\misc.h" />
-    <ClInclude Include="root\Engine\Graphics\texture.h" />
+    <ClInclude Include="root\misc\misc.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="root\fragmentcore.glsl" />
     <None Include="root\glew32.dll" />
     <None Include="root\glfw3.dll" />
-    <None Include="root\vertexcore.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="errorcodes.txt" />

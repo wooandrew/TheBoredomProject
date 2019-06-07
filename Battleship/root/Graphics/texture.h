@@ -1,11 +1,11 @@
 // TheBoredomProject: Battleship (c) Andrew Woo, 2019
-// Website: https://wooandrew.github.io/
 // Email: seungminleader@gmail.com
+// Website: https://wooandrew.github.io
 
 #pragma once
 
-#ifndef TEXTURE_BATTLESHIP
-#define TEXTURE_BATTLESHIP
+#ifndef GRAPHICS_TEXTURE
+#define GRAPHICS_TEXTURE
 
 #include "../lib.h"
 
@@ -16,7 +16,6 @@ public:
 	Texture();
 	Texture(int _id);
 	Texture(std::string path);
-	~Texture();
 
 	int GetID() const;
 	int GetWidth() const;
@@ -31,4 +30,4 @@ private:
 	int textureHeight;
 };
 
-#endif // !TEXTURE_BATTLESHIP
+#endif // !GRAPHICS_TEXTURE

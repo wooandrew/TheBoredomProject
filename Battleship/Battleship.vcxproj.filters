@@ -18,22 +18,22 @@
     <ClCompile Include="root\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="root\misc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="root\Engine\engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="root\Engine\Graphics\graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="root\Engine\Graphics\texture.cpp">
+    <ClCompile Include="root\Graphics\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="root\Graphics\texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="root\Graphics\sprite.cpp">
+    <ClCompile Include="root\Engine\Input\mouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Connect\connect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\misc\misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,30 +41,28 @@
     <ClInclude Include="root\lib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="root\misc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="root\Engine\engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="root\Engine\Graphics\graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="root\Engine\Graphics\texture.h">
+    <ClInclude Include="root\Graphics\sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="root\Graphics\texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="root\Graphics\sprite.h">
+    <ClInclude Include="root\Engine\Input\mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Connect\connect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\misc\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="root\glew32.dll" />
     <None Include="root\glfw3.dll" />
-    <None Include="root\fragmentcore.glsl" />
-    <None Include="root\vertexcore.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="errorcodes.txt" />

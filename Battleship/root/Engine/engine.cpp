@@ -3,84 +3,68 @@
 // Website: https://wooandrew.github.io
 
 #include "engine.h"
+#include "Input/mouse.h"
 
-int Engine::WINDOW_WIDTH = 1300;
-int Engine::WINDOW_HEIGHT = 650;
+Engine::Engine() {};
+Engine::~Engine() {};
 
-int Engine::frameBufferWidth = 0;
-int Engine::frameBufferHeight = 0;
+int Engine::SCREEN_WIDTH = 650;
+int Engine::SCREEN_HEIGHT = 600;
 
 GLFWwindow* Engine::window = NULL;
 
-Engine::Engine() {}
-Engine::~Engine() {}
-
-void Engine::frameBufferResizeCallback(GLFWwindow* window, int _frameBufferWidth, int _frameBufferHeight) {
-
-	glViewport(0, 0, _frameBufferWidth, _frameBufferHeight);
-}
-
 bool Engine::init(char* windowTitle) {
 
-	// *** GLFW Initialization *** START ********************************** *** //
+	// Initialize GLFW
 	if (!glfwInit()) {
-		std::cerr << Misc::GetDateTime() << " |000e| Fatal Error: Failed to initialize GLFW [glfwInit() = false]." << std::endl;
+		Misc::Logger("000e", "Error: Failed to initialize GLFW [glfwInit() = false].");
 		return false;
-	}
+	} 
 	else {
-		std::cerr << Misc::GetDateTime() << " |001e| Successfully initialized GLFW [glfwInit() = true]." << std::endl;
+		Misc::Logger("001e", "Successfully initialized GLFW [glfwInit() = true].");
 	}
-	// *** GLFW Initialization *** END ************************************ *** //
 
-	// *** GLFW Window Creation *** START ********************************* *** //
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
-	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
-
-	window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, windowTitle, NULL, NULL);
+	// Create Window
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowTitle, NULL, NULL);
 	if (window == NULL) {
-		std::cerr << Misc::GetDateTime() << " |002e| Fatal Error: Failed to create window [window = NULL]." << std::endl;
+		Misc::Logger("002e", "Error: Failed to create window [window = NULL].");
 		return false;
 	}
 	else {
-		std::cerr << Misc::GetDateTime() << " |003e| Successfully created window [window != NULL]" << std::endl;
+		Misc::Logger("003e", "Successfully created window [window != NULL].");
 	}
 
-	glfwSetFramebufferSizeCallback(window, frameBufferResizeCallback);
-	// when GLFW_RESIZABLE = GL_TRUE ::: glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
-	// when GLFW_RESIZABLE = GL_TRUE ::: glViewport(0, 0, frameBufferWidth, frameBufferHeight);
+	// GLFW Setup
+	glfwMakeContextCurrent(window);
+	int width, height;
 
-	glfwMakeContextCurrent(window); // CRITICAL
-	// *** GLFW Window Creation *** END *********************************** *** //
+	glfwGetFramebufferSize(window, &width, &height);
+	glfwSwapInterval(1);
 
-	// *** GLEW Initialization *** START ********************************** *** //
-	glewExperimental = GL_TRUE;
+	glfwSetCursorPosCallback(window, Mouse::MousePosCallback);
+	glfwSetMouseButtonCallback(window, Mouse::MouseButtonCallback);
 
-	if (glewInit() != GLEW_OK) {
+	//glfwSetKeyCallback(window, Keyboard::KeyCallback);
 
-		glfwTerminate(); // Terminates GLFW
-		std::cerr << Misc::GetDateTime() << " |004e| Fatal Error: Failed to initialize GLEW [glewInit() = false]." << std::endl;
+	// Window Setup
+	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+	int xPos = (mode->width - SCREEN_WIDTH) / 2;
+	int yPos = (mode->height - SCREEN_HEIGHT) / 2;
+	glfwSetWindowPos(window, xPos, yPos);
 
-		return false;
-	}
-	else {
-		std::cerr << Misc::GetDateTime() << " |005e| Successfully initialized GLEW [glewInit() = true]." << std::endl;
-	}
-	// *** GLEW Initialization *** END ************************************ *** //
+	// Camera Setup
+	glViewport(0, 0, width, height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, width, 0, height, -10, 10);
+	glDepthRange(-10, 10);
+	glMatrixMode(GL_MODELVIEW);
 
-	// *** OpenGL Options *** START *************************************** *** //
-	glEnable(GL_DEPTH_TEST);
-
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
-
+	// Alpha Blending
+	glEnable(GL_ALPHA_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	// *** OpenGL Options *** END ***************************************** *** //
 
 	return true;
 }
@@ -90,13 +74,9 @@ void Engine::Update() const {
 }
 
 void Engine::BeginRender() const {
-	glClearColor(1.0f, 1.0f, 1.0f, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glClearColor(0.53f, 0.81f, 0.92f, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
-
-void Engine::EndRender() const {
-	glfwSwapBuffers(window);
-	glFlush();
-}
+void Engine::EndRender() const { glfwSwapBuffers(window); }
 
 GLFWwindow* Engine::GetWindow() const { return window; }
