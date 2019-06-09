@@ -7,6 +7,10 @@
 
 #include "Engine/engine.h"
 #include "Engine/Input/mouse.h"
+#include "Engine/Input/keyboard.h"
+#include "Engine/Input/button.h"
+
+#include "Graphics/text.h"
 #include "Graphics/sprite.h"
 
 int main() {
@@ -54,9 +58,20 @@ int main() {
 	std::thread tRecvLoop;
 	// *** Connection Initializer *** END ********************************* *** //
 
+	Text test;
+	test.LoadFont("Assets/Fonts/Josefin_Sans/JosefinSans-Regular.ttf", 48);
+
 	Misc::GameState CURRENTSTATE = Misc::GameState::HOMESCREEN;
 
 	host = true;
+
+	//aRecvData = "Hello World";
+
+	Image homescreen("Assets/Screens/homescreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+
+	// x = Engine::SCREEN_WIDTH - 91
+	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, Misc::GameState::TRYCONNECT, true);
+	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, Misc::GameState::EXIT, true);
 
 	Sprite testsprt("Assets/Sprites/test2.png", glm::vec3(300, 300, 0));
 	Sprite testsprt2("Assets/Sprites/test.png", glm::vec3(300, 500, 0), 0.3f);
@@ -65,24 +80,8 @@ int main() {
 	while (run) {
 
 		if (glfwWindowShouldClose(engine.GetWindow())) {
-
-			if (retSocket.valid()) {
-				retSocket.get();
-				retSocket.~future();
-			}
-			else {
-				retSocket.~future();
-			}
 			
-			if (gSocket != INVALID_SOCKET) {
-				Connect::disconnect(gSocket);
-				gSocket = INVALID_SOCKET;
-			}
-			
-			run = false;
-			connected = false;
-
-			break;
+			CURRENTSTATE = Misc::GameState::EXIT;
 		}
 
 		// Update Events
@@ -94,7 +93,21 @@ int main() {
 
 			case Misc::GameState::HOMESCREEN:
 			{
-				CURRENTSTATE = Misc::GameState::TRYCONNECT;
+				CURRENTSTATE = playbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
+				CURRENTSTATE = exitbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
+
+				homescreen.Render();
+				playbutton.GetImage().Render();
+				exitbutton.GetImage().Render();
+
+				std::string teststr = "";
+
+				for (int x : Keyboard::GetKeysPressed()) {
+					teststr += x;
+				}
+
+				test.RenderAll(teststr, 48, glm::vec3(300, 300, 0), glm::vec3());
+
 				break;
 			}
 			case Misc::GameState::TRYCONNECT:
@@ -159,10 +172,12 @@ int main() {
 			case Misc::GameState::EXIT:
 			{
 				if (gSocket != INVALID_SOCKET) {
-					Connect::disconnect(std::ref(gSocket));
+					Connect::disconnect(gSocket);
 				}
 
 				run = false;
+				connected = false;
+
 				break;
 			}
 		}
@@ -171,15 +186,23 @@ int main() {
 	}
 	// *** Main Loop *** END *** ****************************************** *** //
 
+	// *** Cleanup *** **************************************************** *** //
+	Misc::Logger("001x", "Closed OpenGL window [glfwWindowShouldClose() = true].");
+	glfwTerminate();
+
+	if (retSocket.valid()) {
+		retSocket.get();
+		retSocket.~future();
+	}
+	else {
+		retSocket.~future();
+	}
+
 	if (tRecvLoop.joinable()) {
 		tRecvLoop.join();
 	}
 
-	// *** Cleanup *** **************************************************** *** //
-	Misc::Logger("001x", "Closed OpenGL window [glfwWindowShouldClose() = true].");
 	Misc::Logger("002x", "PROGRAM TERMINATED.");
-
-	glfwTerminate();
 	log.close();
 
 	return 0;

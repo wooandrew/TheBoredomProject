@@ -28,8 +28,8 @@ public:
 	GLFWwindow* GetWindow() const;
 
 private:
-	static GLFWwindow* window;
 
+	static GLFWwindow* window;
 };
 
 #endif

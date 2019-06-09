@@ -32,7 +32,8 @@ namespace Connect {
 				stream << "Error: send() failed with error [" << LastError << "].";
 				Misc::Logger("017c", stream.str());
 
-				if (LastError == WSAENETRESET | WSAECONNABORTED | WSAECONNRESET | WSAENOTCONN | WSAESHUTDOWN | WSAETIMEDOUT) {
+				if ((LastError == WSAENETRESET) || (LastError == WSAECONNABORTED) || (LastError == WSAECONNRESET) || 
+					(LastError == WSAENOTCONN) || (LastError == WSAESHUTDOWN) || (LastError == WSAETIMEDOUT)) {
 					disconnect(std::ref(gSocket));
 				}
 			}

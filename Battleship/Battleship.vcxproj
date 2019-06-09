@@ -97,7 +97,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;LDT\lib\libdrawtext.lib;GL\lib\freeglut.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -113,7 +113,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;LDT\lib\libdrawtext.lib;GL\lib\freeglut.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -133,7 +133,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;LDT\lib\libdrawtext.lib;GL\lib\freeglut.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -153,29 +153,39 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;GLFW\lib\glfw3.lib;GLEW\lib\glew32.lib;SOIL2\lib\soil2.lib;LDT\lib\libdrawtext.lib;GL\lib\freeglut.lib;Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)includes;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="root\Connect\connect.cpp" />
     <ClCompile Include="root\Engine\engine.cpp" />
+    <ClCompile Include="root\Engine\Input\button.cpp" />
+    <ClCompile Include="root\Engine\Input\keyboard.cpp" />
     <ClCompile Include="root\Engine\Input\mouse.cpp" />
     <ClCompile Include="root\Graphics\sprite.cpp" />
+    <ClCompile Include="root\Graphics\text.cpp" />
     <ClCompile Include="root\Graphics\texture.cpp" />
     <ClCompile Include="root\main.cpp" />
     <ClCompile Include="root\misc\misc.cpp" />
+    <ClCompile Include="root\misc\userinput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="root\Connect\connect.h" />
     <ClInclude Include="root\Engine\engine.h" />
+    <ClInclude Include="root\Engine\Input\button.h" />
+    <ClInclude Include="root\Engine\Input\keyboard.h" />
     <ClInclude Include="root\Engine\Input\mouse.h" />
     <ClInclude Include="root\Graphics\sprite.h" />
+    <ClInclude Include="root\Graphics\text.h" />
     <ClInclude Include="root\Graphics\texture.h" />
     <ClInclude Include="root\lib.h" />
     <ClInclude Include="root\misc\misc.h" />
+    <ClInclude Include="root\misc\userinput.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="root\freetype.dll" />
     <None Include="root\glew32.dll" />
     <None Include="root\glfw3.dll" />
   </ItemGroup>
@@ -184,5 +194,14 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets" Condition="Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" />
+    <Import Project="..\packages\freetype.2.8.0.1\build\native\freetype.targets" Condition="Exists('..\packages\freetype.2.8.0.1\build\native\freetype.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype.redist.2.8.0.1\build\native\freetype.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\freetype.2.8.0.1\build\native\freetype.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\freetype.2.8.0.1\build\native\freetype.targets'))" />
+  </Target>
 </Project>

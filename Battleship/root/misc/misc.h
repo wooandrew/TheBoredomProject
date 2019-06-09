@@ -13,10 +13,14 @@
 #include <chrono>
 #include <mutex>
 #include <future>
+#include <GLFW/src/glfw3.h>
 
 namespace Misc {
 
 	static std::mutex mu;
+
+	static double deltaTime = 0;
+	static double lastTime = 0;
 
 	std::string GetDateTime();
 
@@ -49,6 +53,9 @@ namespace Misc {
 		GAMEOVER,
 		EXIT
 	};
+
+	double GetDeltaTime();
+	void UpdateDeltaTime();
 }
 
 #endif // !MISC_FUNCTIONS

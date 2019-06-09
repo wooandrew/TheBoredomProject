@@ -119,7 +119,7 @@ namespace Connect {
 			FD_SET(ListenSocket, &readFDS);
 			timeval timeout;
 
-			timeout.tv_sec = 90;
+			timeout.tv_sec = 30;
 			timeout.tv_usec = 0;
 
 			iResult = select(0, &readFDS, NULL, NULL, &timeout);
@@ -174,11 +174,11 @@ namespace Connect {
 		int iResult = 0;
 		bool recvRun = true;
 
+		char recvbuf[DEFAULT_BUFLEN];
+		int recvbuflen = DEFAULT_BUFLEN;
+
 		// Receive until the peer shuts down the connection
 		do {
-			char recvbuf[DEFAULT_BUFLEN];
-			int recvbuflen = DEFAULT_BUFLEN;
-
 			if (!run) {
 
 				recvRun = false;
@@ -218,13 +218,15 @@ namespace Connect {
 					std::stringstream stream;
 					stream << "Error: recv() failed with error [" << LastError << "].";
 					Misc::Logger("014c", stream.str());
-				}
-				
 
-				return 1;
+					disconnect(std::ref(gSocket));
+
+					return 1;
+				}
+				// return 1;
 			}
 
-		} while (iResult > 0 && recvRun);
+		} while (recvRun);
 
 		return 0;
 	}
@@ -243,6 +245,8 @@ namespace Connect {
 
 			closesocket(gSocket);
 			WSACleanup();
+
+			gSocket = INVALID_SOCKET; // CHECK IF WORKS
 
 			return;
 		}

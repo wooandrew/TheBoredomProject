@@ -3,7 +3,9 @@
 // Website: https://wooandrew.github.io
 
 #include "engine.h"
+
 #include "Input/mouse.h"
+#include "Input/keyboard.h"
 
 Engine::Engine() {};
 Engine::~Engine() {};
@@ -45,7 +47,7 @@ bool Engine::init(char* windowTitle) {
 	glfwSetCursorPosCallback(window, Mouse::MousePosCallback);
 	glfwSetMouseButtonCallback(window, Mouse::MouseButtonCallback);
 
-	//glfwSetKeyCallback(window, Keyboard::KeyCallback);
+	glfwSetKeyCallback(window, Keyboard::KeyCallback);
 
 	// Window Setup
 	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -70,11 +72,12 @@ bool Engine::init(char* windowTitle) {
 }
 
 void Engine::Update() const {
+	Misc::UpdateDeltaTime();
 	glfwPollEvents();
 }
 
 void Engine::BeginRender() const {
-	glClearColor(0.53f, 0.81f, 0.92f, 1);
+	glClearColor(1.0f, 1.0f, 1.0f, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 void Engine::EndRender() const { glfwSwapBuffers(window); }

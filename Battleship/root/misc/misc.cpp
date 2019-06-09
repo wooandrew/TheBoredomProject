@@ -17,5 +17,15 @@ namespace Misc {
 
 		return toString.str();
 	}
-}
 
+	double GetDeltaTime() {
+		return deltaTime;
+	}
+
+	void UpdateDeltaTime() {
+
+		double currentTime = glfwGetTime();
+		deltaTime = currentTime - lastTime;
+		lastTime = currentTime;
+	}
+}

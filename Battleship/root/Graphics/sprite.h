@@ -50,4 +50,6 @@ private:
 	bool flip;
 };
 
+typedef Sprite Image;
+
 #endif // !GRAPHICS_SPRITE

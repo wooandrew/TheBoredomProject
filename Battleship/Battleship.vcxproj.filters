@@ -36,6 +36,18 @@
     <ClCompile Include="root\misc\misc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="root\Engine\Input\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Graphics\text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Engine\Input\keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\misc\userinput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="root\lib.h">
@@ -59,10 +71,24 @@
     <ClInclude Include="root\misc\misc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="root\Engine\Input\button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Graphics\text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Engine\Input\keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\misc\userinput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="root\glew32.dll" />
     <None Include="root\glfw3.dll" />
+    <None Include="packages.config" />
+    <None Include="root\freetype.dll" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="errorcodes.txt" />

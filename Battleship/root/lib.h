@@ -16,13 +16,19 @@
 #include <sstream>
 #include <fstream>
 #include <thread>
+#include <vector>
+#include <map>
 
 #include <GLEW/src/glew.h>
 #include <GLFW/src/glfw3.h>
 
+#include <GL/src/glut.h>
+
 #include <GLM/src/glm.hpp>
 #include <GLM/src/vec2.hpp>
 #include <GLM/src/vec3.hpp>
+
+#include <LDT/src/drawtext.h>
 
 #include <SOIL2/src/SOIL2.h>
 
