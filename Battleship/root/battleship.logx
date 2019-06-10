@@ -1,165 +1,158 @@
+battleship.logx | Battleship GAME LOG generated @ 2019/06/10 _ 16:03:53
 ----------------------------------------------------------------------------
-2019/06/08 _ 15:07:18 |000x| PROGRAM STARTED.
-2019/06/08 _ 15:07:19 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 15:07:19 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 15:07:19 |005e| Successfully initialized game engine.
-2019/06/08 _ 15:07:19 |001f| Successfully loaded font.
-2019/06/08 _ 15:07:19 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 15:07:19 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 15:07:19 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 15:07:19 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 15:07:19 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 15:07:29 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 15:07:29 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:03:53 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:03:53 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:03:53 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:03:53 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:03:53 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:03:53 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:04:11 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:04:11 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:04:11 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:04:11 |020c| Failed to connect to [127.0.0.1:].
+2019/06/10 _ 16:04:15 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:04:15 |002x| PROGRAM TERMINATED.
 ----------------------------------------------------------------------------
-2019/06/08 _ 20:29:15 |000x| PROGRAM STARTED.
-2019/06/08 _ 20:29:16 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 20:29:17 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 20:29:17 |005e| Successfully initialized game engine.
-2019/06/08 _ 20:29:17 |001f| Successfully loaded font.
-2019/06/08 _ 20:29:17 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:29:17 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:29:17 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:29:17 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:29:17 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:29:37 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 20:29:37 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:05:20 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:05:21 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:05:21 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:05:21 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:05:21 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:21 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:05:40 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:05:40 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:05:40 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:05:40 |020c| Failed to connect to [127.0.0.1:].
+2019/06/10 _ 16:05:44 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:05:44 |002x| PROGRAM TERMINATED.
 ----------------------------------------------------------------------------
-2019/06/08 _ 20:30:39 |000x| PROGRAM STARTED.
-2019/06/08 _ 20:30:39 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 20:30:40 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 20:30:40 |005e| Successfully initialized game engine.
-2019/06/08 _ 20:30:40 |001f| Successfully loaded font.
-2019/06/08 _ 20:30:40 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:30:40 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:30:40 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:30:40 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:30:40 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:17 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 20:31:17 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:06:14 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:06:15 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:06:15 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:06:15 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:06:15 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:15 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:06:26 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:06:26 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:06:26 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:06:26 |020c| Failed to connect to [127.0.0.1:].
+2019/06/10 _ 16:06:34 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:06:34 |002x| PROGRAM TERMINATED.
 ----------------------------------------------------------------------------
-2019/06/08 _ 20:31:35 |000x| PROGRAM STARTED.
-2019/06/08 _ 20:31:35 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 20:31:36 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 20:31:36 |005e| Successfully initialized game engine.
-2019/06/08 _ 20:31:36 |001f| Successfully loaded font.
-2019/06/08 _ 20:31:36 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:36 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:36 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:36 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:36 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:31:46 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 20:31:46 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:07:50 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:07:51 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:07:51 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:07:51 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:07:51 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:07:51 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:11 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:08:11 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:08:11 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:08:12 |020c| Failed to connect to [127.0.0.1:30980].
+2019/06/10 _ 16:08:27 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:08:27 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:08:27 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:08:28 |020c| Failed to connect to [127.0.0.1:30980].
 ----------------------------------------------------------------------------
-2019/06/08 _ 20:32:09 |000x| PROGRAM STARTED.
-2019/06/08 _ 20:32:10 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 20:32:10 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 20:32:10 |005e| Successfully initialized game engine.
-2019/06/08 _ 20:32:10 |001f| Successfully loaded font.
-2019/06/08 _ 20:32:10 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:10 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:10 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:10 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:10 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:08:34 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:08:34 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:08:34 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:08:34 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:34 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:08:38 |001c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:08:38 |003c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:08:38 |005c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:08:38 |007c| Successfully set up listening socket [socket() != SOCKET_ERROR].
+2019/06/10 _ 16:08:38 |009c| xxxx_success [listen() != SOCKET_ERROR].
+2019/06/10 _ 16:08:38 |    | Connecting...
+2019/06/10 _ 16:08:40 |015c| Successfully initialized Winsock [WSAStartup() = 0].
+2019/06/10 _ 16:08:40 |017c| xxxx_success [getaddrinfo() = 0].
+2019/06/10 _ 16:08:40 |019c| Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].
+2019/06/10 _ 16:08:40 |021c| Successfully connected to [127.0.0.1:30980].
+2019/06/10 _ 16:08:40 |011c| xxxx_success [select() != 0].
+2019/06/10 _ 16:08:40 |013c| Successfully accepted client [accept() = ClientSocket != INVALID_SOCKET].
+2019/06/10 _ 16:08:57 |    | Closing connection...
+2019/06/10 _ 16:08:57 |025c  | | osing connection...
+Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].
+2019/06/10 _ 16:08:57 |    | Closing connection...| 
+Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].
+2019/06/10 _ 16:08:57 |024c| Fatal Error: shutdown() failed with error [10093].
+2019/06/10 _ 16:08:57 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:08:57 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:09:09 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:09:09 |002x| PROGRAM TERMINATED.
 ----------------------------------------------------------------------------
-2019/06/08 _ 20:32:39 |000x| PROGRAM STARTED.
-2019/06/08 _ 20:32:40 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 20:32:40 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 20:32:40 |005e| Successfully initialized game engine.
-2019/06/08 _ 20:32:40 |001f| Successfully loaded font.
-2019/06/08 _ 20:32:40 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:40 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:40 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:40 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:40 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 20:32:48 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 20:32:48 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:10:36 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:10:37 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:10:37 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:10:37 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:10:37 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:10:37 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:29 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:12:29 |002x| PROGRAM TERMINATED.
 ----------------------------------------------------------------------------
-2019/06/08 _ 23:06:12 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:06:13 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:06:13 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:06:13 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:06:13 |001f| Successfully loaded font.
-2019/06/08 _ 23:06:14 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:06:14 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:06:14 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:06:14 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:06:14 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:06:26 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:06:26 |002x| PROGRAM TERMINATED.
-----------------------------------------------------------------------------
-2019/06/08 _ 23:09:24 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:09:25 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:09:25 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:09:25 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:09:25 |001f| Successfully loaded font.
-2019/06/08 _ 23:09:25 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:09:25 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:09:25 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:09:25 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:09:25 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:09:36 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:09:36 |002x| PROGRAM TERMINATED.
-----------------------------------------------------------------------------
-2019/06/08 _ 23:10:10 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:10:10 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:10:11 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:10:11 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:10:11 |001f| Successfully loaded font.
-2019/06/08 _ 23:10:11 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:10:11 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:10:11 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:10:11 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:10:11 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:11:31 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:11:31 |002x| PROGRAM TERMINATED.
-----------------------------------------------------------------------------
-2019/06/08 _ 23:11:40 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:11:40 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:11:40 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:11:40 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:11:40 |001f| Successfully loaded font.
-2019/06/08 _ 23:11:40 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:11:40 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:11:40 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:11:40 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:11:40 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-----------------------------------------------------------------------------
-2019/06/08 _ 23:12:55 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:12:55 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:12:56 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:12:56 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:12:56 |001f| Successfully loaded font.
-2019/06/08 _ 23:12:56 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:12:56 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:12:56 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:12:56 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:12:56 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:13:24 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:13:24 |002x| PROGRAM TERMINATED.
-----------------------------------------------------------------------------
-2019/06/08 _ 23:15:05 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:15:06 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:15:06 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:15:06 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:15:06 |001f| Successfully loaded font.
-2019/06/08 _ 23:15:06 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:15:06 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:15:06 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:15:06 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:15:06 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:15:51 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:15:51 |002x| PROGRAM TERMINATED.
-----------------------------------------------------------------------------
-2019/06/08 _ 23:16:14 |000x| PROGRAM STARTED.
-2019/06/08 _ 23:16:14 |001e| Successfully initialized GLFW [glfwInit() = true].
-2019/06/08 _ 23:16:14 |003e| Successfully created window [window != NULL].
-2019/06/08 _ 23:16:14 |005e| Successfully initialized game engine.
-2019/06/08 _ 23:16:14 |001f| Successfully loaded font.
-2019/06/08 _ 23:16:14 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:16:14 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:16:14 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:16:14 |003t| Successfully loaded asset from [Assets/Sprites/test2.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:16:14 |003t| Successfully loaded asset from [Assets/Sprites/test.png] ___ [GetTextureParams() = true].
-2019/06/08 _ 23:17:28 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
-2019/06/08 _ 23:17:28 |002x| PROGRAM TERMINATED.
+2019/06/10 _ 16:12:34 |000x| PROGRAM STARTED.
+2019/06/10 _ 16:12:35 |001e| Successfully initialized GLFW [glfwInit() = true].
+2019/06/10 _ 16:12:35 |003e| Successfully created window [window != NULL].
+2019/06/10 _ 16:12:35 |005e| Successfully initialized game engine.
+2019/06/10 _ 16:12:35 |001f| Successfully loaded font from [Assets/Fonts/abel.ttf].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Screens/homescreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Buttons/playbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Buttons/exitbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Buttons/backbutton.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Screens/connectscreen.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Buttons/host.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Buttons/connect.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Textboxes/ipaddr.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:12:35 |003t| Successfully loaded asset from [Assets/Textboxes/port.png] ___ [GetTextureParams() = true].
+2019/06/10 _ 16:13:00 |001x| Closed OpenGL window [glfwWindowShouldClose() = true].
+2019/06/10 _ 16:13:00 |002x| PROGRAM TERMINATED.

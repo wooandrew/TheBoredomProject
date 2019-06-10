@@ -18,12 +18,15 @@ void Text::LoadFont(std::string fontPath, int fontSize) {
 	if (!(fontStruct = dtx_open_font(c_fontPath, fontSize))) {
 
 		std::stringstream stream;
-		stream << "Errpf: Failed to load font from [" << fontPath << "].";
+		stream << "Error: Failed to load font from [" << fontPath << "].";
 		Misc::Logger("000f", stream.str());
 	}
 	else {
 		font.insert(std::pair<int, struct dtx_font*>(fontSize, fontStruct));
-		Misc::Logger("001f", "Successfully loaded font.");
+
+		std::stringstream stream;
+		stream << "Successfully loaded font from [" << fontPath << "].";
+		Misc::Logger("001f", stream.str());
 	}
 }
 

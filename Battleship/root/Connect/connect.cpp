@@ -8,7 +8,9 @@ constexpr auto DEFAULT_BUFLEN = 4098;
 
 namespace Connect {
 
-	SOCKET connect(bool host, std::string sipaddr, PCSTR port) {
+	SOCKET connect(bool host, std::string sipaddr, std::string _port) {
+
+		const char* port = _port.c_str();
 
 		if (host) {
 
@@ -135,7 +137,7 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("012c", "xxxx_success [select() != 0].");
+				Misc::Logger("011c", "xxxx_success [select() != 0].");
 			}
 
 			// Accept a client socket
@@ -162,7 +164,100 @@ namespace Connect {
 			return ClientSocket;
 		}
 		else {
-			// NON HOST CONNECtiONS
+			
+			WSADATA wsaData;
+			SOCKET ConnectSocket = INVALID_SOCKET;
+			struct addrinfo* result = NULL, *ptr = NULL, hints;
+			int iResult;
+
+			// Initialize Winsock
+			iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+			if (iResult != 0) {
+				
+				std::stringstream stream;
+				stream << "Fatal Error: WSAStartup() failed with error [" << iResult << "].";
+				Misc::Logger("014c", stream.str());
+
+				return INVALID_SOCKET;
+			}
+			else {
+				Misc::Logger("015c", "Successfully initialized Winsock [WSAStartup() = 0].");
+			}
+
+			ZeroMemory(&hints, sizeof(hints));
+			hints.ai_family = AF_UNSPEC;
+			hints.ai_socktype = SOCK_STREAM;
+			hints.ai_protocol = IPPROTO_TCP;
+
+			// Resolve the server address and port
+			iResult = getaddrinfo(sipaddr.c_str(), port, &hints, &result);
+			if (iResult != 0) {
+				
+				std::stringstream stream;
+				stream << "Fatal Error: getaddrinfo() failed with error [" << iResult << "].";
+				Misc::Logger("016c", stream.str());
+
+				WSACleanup();
+
+				return INVALID_SOCKET;
+			}
+			else {
+				Misc::Logger("017c", "xxxx_success [getaddrinfo() = 0].");
+			}
+
+			// Attempt to connect to an address until one succeeds
+			for (ptr = result; ptr != NULL; ptr = ptr->ai_next) {
+
+				// Create a SOCKET for connecting to server
+				ConnectSocket = socket(ptr->ai_family, ptr->ai_socktype, ptr->ai_protocol);
+				if (ConnectSocket == INVALID_SOCKET) {
+					
+					std::stringstream stream;
+					stream << "Fatal Error: socket() failed with error [" << WSAGetLastError() << "].";
+					Misc::Logger("018c", stream.str());
+
+					freeaddrinfo(result);
+					WSACleanup();
+
+					return INVALID_SOCKET;
+				}
+				else {
+					Misc::Logger("019c", "Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].");
+				}
+
+				// Connect to server.
+				iResult = connect(ConnectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+				if (iResult == SOCKET_ERROR) {
+
+					closesocket(ConnectSocket);
+					ConnectSocket = INVALID_SOCKET;
+
+					continue;
+				}
+				break;
+			}
+
+			freeaddrinfo(result);
+
+			if (ConnectSocket == INVALID_SOCKET) {
+				
+				std::stringstream stream;
+				stream << "Failed to connect to [" << sipaddr << ":" << port << "].";
+				Misc::Logger("020c", stream.str());
+
+				WSACleanup();
+				
+				return INVALID_SOCKET;
+			}
+			else {
+
+				std::stringstream stream;
+				stream << "Successfully connected to [" << sipaddr << ":" << port << "].";
+				Misc::Logger("021c", stream.str());
+
+				return ConnectSocket;
+			}
+
 			return INVALID_SOCKET;
 		}
 
@@ -215,15 +310,15 @@ namespace Connect {
 				int LastError = WSAGetLastError();
 
 				if (LastError != WSAEWOULDBLOCK) {
+
 					std::stringstream stream;
 					stream << "Error: recv() failed with error [" << LastError << "].";
-					Misc::Logger("014c", stream.str());
+					Misc::Logger("022c", stream.str());
 
 					disconnect(std::ref(gSocket));
 
 					return 1;
 				}
-				// return 1;
 			}
 
 		} while (recvRun);
@@ -241,7 +336,7 @@ namespace Connect {
 
 			std::stringstream stream;
 			stream << "Fatal Error: shutdown() failed with error [" << WSAGetLastError() << "].";
-			Misc::Logger("015c", stream.str());
+			Misc::Logger("024c", stream.str());
 
 			closesocket(gSocket);
 			WSACleanup();
@@ -251,7 +346,7 @@ namespace Connect {
 			return;
 		}
 		else {
-			Misc::Logger("016c", "Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].");
+			Misc::Logger("025c", "Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].");
 		}
 
 		// Cleanup

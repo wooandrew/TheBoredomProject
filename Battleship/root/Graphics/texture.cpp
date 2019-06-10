@@ -30,7 +30,7 @@ Texture::Texture(std::string path) : Texture() {
 	if (!GetTextureParams()) {
 
 		std::stringstream stream;
-		stream << "Error: Failed to load asset from[" << path << "] ___[GetTextureParams() = false].";
+		stream << "Error: Failed to load asset from [" << path << "] ___[GetTextureParams() = false].";
 		Misc::Logger("002t", stream.str());
 	}
 	else {

@@ -163,12 +163,13 @@
     <ClCompile Include="root\Engine\Input\button.cpp" />
     <ClCompile Include="root\Engine\Input\keyboard.cpp" />
     <ClCompile Include="root\Engine\Input\mouse.cpp" />
+    <ClCompile Include="root\Engine\Math\math.cpp" />
     <ClCompile Include="root\Graphics\sprite.cpp" />
     <ClCompile Include="root\Graphics\text.cpp" />
     <ClCompile Include="root\Graphics\texture.cpp" />
     <ClCompile Include="root\main.cpp" />
     <ClCompile Include="root\misc\misc.cpp" />
-    <ClCompile Include="root\misc\userinput.cpp" />
+    <ClCompile Include="root\Engine\Input\textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="root\Connect\connect.h" />
@@ -176,15 +177,17 @@
     <ClInclude Include="root\Engine\Input\button.h" />
     <ClInclude Include="root\Engine\Input\keyboard.h" />
     <ClInclude Include="root\Engine\Input\mouse.h" />
+    <ClInclude Include="root\Engine\Math\math.h" />
     <ClInclude Include="root\Graphics\sprite.h" />
     <ClInclude Include="root\Graphics\text.h" />
     <ClInclude Include="root\Graphics\texture.h" />
     <ClInclude Include="root\lib.h" />
     <ClInclude Include="root\misc\misc.h" />
-    <ClInclude Include="root\misc\userinput.h" />
+    <ClInclude Include="root\Engine\Input\textbox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="root\freeglut.dll" />
     <None Include="root\freetype.dll" />
     <None Include="root\glew32.dll" />
     <None Include="root\glfw3.dll" />

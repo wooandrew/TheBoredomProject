@@ -9,9 +9,12 @@
 #include "Engine/Input/mouse.h"
 #include "Engine/Input/keyboard.h"
 #include "Engine/Input/button.h"
+#include "Engine/Input/textbox.h"
 
 #include "Graphics/text.h"
 #include "Graphics/sprite.h"
+
+// RULE: Host goes first.
 
 int main() {
 
@@ -58,23 +61,23 @@ int main() {
 	std::thread tRecvLoop;
 	// *** Connection Initializer *** END ********************************* *** //
 
-	Text test;
-	test.LoadFont("Assets/Fonts/Josefin_Sans/JosefinSans-Regular.ttf", 48);
+	Text abel;
+	abel.LoadFont("Assets/Fonts/abel.ttf", 46);
 
 	Misc::GameState CURRENTSTATE = Misc::GameState::HOMESCREEN;
 
-	host = true;
-
-	//aRecvData = "Hello World";
+	host = false;
 
 	Image homescreen("Assets/Screens/homescreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
-
-	// x = Engine::SCREEN_WIDTH - 91
 	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, Misc::GameState::TRYCONNECT, true);
 	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, Misc::GameState::EXIT, true);
+	Button backbutton("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, Misc::GameState::HOMESCREEN, true);
 
-	Sprite testsprt("Assets/Sprites/test2.png", glm::vec3(300, 300, 0));
-	Sprite testsprt2("Assets/Sprites/test.png", glm::vec3(300, 500, 0), 0.3f);
+	Image connectscreen("Assets/Screens/connectscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+	Button hostbutton("Assets/Buttons/host.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0), 1.0f, true);
+	Button connectbutton("Assets/Buttons/connect.png", glm::vec3(Engine::SCREEN_WIDTH / 2, 95, 0), 1.0f, false);
+	Textbox tbipaddr("Assets/Textboxes/ipaddr.png", glm::vec3(200, 170, 0), 1.0f);
+	Textbox tbport("Assets/Textboxes/port.png", glm::vec3(Engine::SCREEN_WIDTH - 130.5, 170, 0), 1.0f);
 
 	// *** Main Loop *** START *** **************************************** *** //
 	while (run) {
@@ -98,31 +101,50 @@ int main() {
 
 				homescreen.Render();
 				playbutton.GetImage().Render();
-				exitbutton.GetImage().Render();
-
-				std::string teststr = "";
-
-				for (int x : Keyboard::GetKeysPressed()) {
-					teststr += x;
-				}
-
-				test.RenderAll(teststr, 48, glm::vec3(300, 300, 0), glm::vec3());
+				exitbutton.GetImage().Render();				
 
 				break;
 			}
 			case Misc::GameState::TRYCONNECT:
 			{
-				if (!connecting && !connected) {
-					retSocket = std::async(std::launch::async, Connect::connect, host, "127.0.0.1", "30980");
-					connecting = true;
+				CURRENTSTATE = backbutton.Update(CURRENTSTATE, -130, 95);
+
+				tbipaddr.Update();
+				tbport.Update();
+
+				host = hostbutton.Update(host);
+				if (hostbutton.GetButtonPressed()) {
+
+					if (!connecting && !connected) {
+						retSocket = std::async(std::launch::async, Connect::connect, host, "", "30980");
+						connecting = true;
+					}
 				}
+
+				host = connectbutton.Update(host);
+				if (connectbutton.GetButtonPressed()) {
+
+					if (!connecting && !connected) {
+						retSocket = std::async(std::launch::async, Connect::connect, host, tbipaddr.GetText(), tbport.GetText());
+						connecting = true;
+					}
+				}
+
+				connectscreen.Render();
+
+				backbutton.GetImage().Render();
+				hostbutton.GetImage().Render();
+				connectbutton.GetImage().Render();
+
+				tbipaddr.Render(std::ref(abel), 46);
+				tbport.Render(std::ref(abel), 46);
 
 				if (retSocket._Is_ready()) {
 
 					gSocket = retSocket.get();
 
 					if (gSocket != INVALID_SOCKET) {
-					
+
 						CURRENTSTATE = Misc::GameState::PLAYGAME;
 
 						tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
@@ -133,6 +155,8 @@ int main() {
 					else {
 
 						CURRENTSTATE = Misc::GameState::CONNECTFAIL;
+
+						retSocket.~future();
 
 						connecting = false;
 						connected = false;

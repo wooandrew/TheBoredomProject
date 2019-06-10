@@ -48,6 +48,7 @@ bool Engine::init(char* windowTitle) {
 	glfwSetMouseButtonCallback(window, Mouse::MouseButtonCallback);
 
 	glfwSetKeyCallback(window, Keyboard::KeyCallback);
+	glfwSetCharCallback(window, Keyboard::CharCallback);
 
 	// Window Setup
 	const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());

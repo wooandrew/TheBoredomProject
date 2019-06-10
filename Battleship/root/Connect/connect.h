@@ -11,7 +11,7 @@
 
 namespace Connect {
 
-	SOCKET connect(bool host, std::string sipaddr = "127.0.0.1", PCSTR port = "30980");
+	SOCKET connect(bool host, std::string sipaddr = "127.0.0.1", std::string _port = "30980");
 	void disconnect(SOCKET& gSocket);
 
 	int RecvData(bool& run, SOCKET& gSocket);
@@ -30,7 +30,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Error: send() failed with error [" << LastError << "].";
-				Misc::Logger("017c", stream.str());
+				Misc::Logger("023c", stream.str());
 
 				if ((LastError == WSAENETRESET) || (LastError == WSAECONNABORTED) || (LastError == WSAECONNRESET) || 
 					(LastError == WSAENOTCONN) || (LastError == WSAESHUTDOWN) || (LastError == WSAETIMEDOUT)) {

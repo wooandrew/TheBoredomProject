@@ -45,7 +45,10 @@
     <ClCompile Include="root\Engine\Input\keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="root\misc\userinput.cpp">
+    <ClCompile Include="root\Engine\Input\textbox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Engine\Math\math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +83,10 @@
     <ClInclude Include="root\Engine\Input\keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="root\misc\userinput.h">
+    <ClInclude Include="root\Engine\Input\textbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Engine\Math\math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,6 +95,7 @@
     <None Include="root\glfw3.dll" />
     <None Include="packages.config" />
     <None Include="root\freetype.dll" />
+    <None Include="root\freeglut.dll" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="errorcodes.txt" />

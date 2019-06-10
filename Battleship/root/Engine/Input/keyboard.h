@@ -16,15 +16,16 @@ public:
 	Keyboard() = delete;
 
 	static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int modifiers);
+	static void CharCallback(GLFWwindow* window, unsigned int key);
 
 	static bool KeyDown(int key);
 	static bool KeyUp(int key);
 	static bool KeyIsPressed(int key);
 
-	static std::vector<char> GetKeysPressed();
+	static std::vector<int> GetKeysPressed();
 	static void ResetKeysPressed();
 
-	static std::vector<char> keysPressed;
+	static std::vector<int> keysPressed;
 
 private:
 
