@@ -63,13 +63,17 @@ public:
 				buttonPressable = false;
 				return retVal;
 			}
-			else if (!Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+			else {
 				buttonPressable = true;
 			}
 		}
 		HideAway(xmax, xmin, HideAwayButton);
 
 		return _return;
+	}
+
+	void Render() const {
+		buttonimage.Render();
 	}
 
 	void HideAway(int xmax, int xmin, bool use) {
@@ -85,7 +89,7 @@ public:
 
 				if (buttonimage.GetPosition()->x > xmin) {
 
-					double moveX = buttonimage.GetPosition()->x - (1000 * Misc::GetDeltaTime());
+					double moveX = buttonimage.GetPosition()->x - (1000 * Utilities::GetDeltaTime());
 					buttonimage.SetPosition(glm::vec3(moveX, buttonimage.GetPosition()->y, 0));
 					UpdateRect();
 				}
@@ -99,7 +103,7 @@ public:
 
 				if (buttonimage.GetPosition()->x < xmax) {
 
-					double moveX = buttonimage.GetPosition()->x + (1000 * Misc::GetDeltaTime());
+					double moveX = buttonimage.GetPosition()->x + (1000 * Utilities::GetDeltaTime());
 					buttonimage.SetPosition(glm::vec3(moveX, buttonimage.GetPosition()->y, 0));
 					UpdateRect();
 				}

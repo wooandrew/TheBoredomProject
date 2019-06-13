@@ -30,7 +30,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Error: send() failed with error [" << LastError << "].";
-				Misc::Logger("023c", stream.str());
+				Utilities::Logger("023c", stream.str());
 
 				if ((LastError == WSAENETRESET) || (LastError == WSAECONNABORTED) || (LastError == WSAECONNRESET) || 
 					(LastError == WSAENOTCONN) || (LastError == WSAESHUTDOWN) || (LastError == WSAETIMEDOUT)) {

@@ -59,6 +59,16 @@ void Textbox::Update() {
 				return;
 			}
 		}
+		else {
+
+			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+
+				update = false;
+				Keyboard::ResetKeysPressed();
+
+				return;
+			}
+		}
 
 		for (int key : _KeyPress) {
 			

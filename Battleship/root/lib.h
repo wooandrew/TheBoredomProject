@@ -9,15 +9,15 @@
 
 #include <WS2tcpip.h>
 
-#include <iostream>
-#include <functional>
-#include <future>
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <thread>
-#include <vector>
-#include <map>
+#include <iostream>			// General
+#include <string>			// General
+#include <sstream>			// General
+#include <vector>			// General
+#include <future>			// main.cpp
+#include <fstream>			// main.cpp
+#include <thread>			// main.cpp
+#include <list>				// Game/game.h
+#include <map>				// Graphics/text.h
 
 #include <GLEW/src/glew.h>
 #include <GLFW/src/glfw3.h>

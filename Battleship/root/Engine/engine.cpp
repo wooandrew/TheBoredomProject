@@ -19,22 +19,22 @@ bool Engine::init(char* windowTitle) {
 
 	// Initialize GLFW
 	if (!glfwInit()) {
-		Misc::Logger("000e", "Error: Failed to initialize GLFW [glfwInit() = false].");
+		Utilities::Logger("000e", "Error: Failed to initialize GLFW [glfwInit() = false].");
 		return false;
 	} 
 	else {
-		Misc::Logger("001e", "Successfully initialized GLFW [glfwInit() = true].");
+		Utilities::Logger("001e", "Successfully initialized GLFW [glfwInit() = true].");
 	}
 
 	// Create Window
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, windowTitle, NULL, NULL);
 	if (window == NULL) {
-		Misc::Logger("002e", "Error: Failed to create window [window = NULL].");
+		Utilities::Logger("002e", "Error: Failed to create window [window = NULL].");
 		return false;
 	}
 	else {
-		Misc::Logger("003e", "Successfully created window [window != NULL].");
+		Utilities::Logger("003e", "Successfully created window [window != NULL].");
 	}
 
 	// GLFW Setup
@@ -73,7 +73,7 @@ bool Engine::init(char* windowTitle) {
 }
 
 void Engine::Update() const {
-	Misc::UpdateDeltaTime();
+	Utilities::UpdateDeltaTime();
 	glfwPollEvents();
 }
 

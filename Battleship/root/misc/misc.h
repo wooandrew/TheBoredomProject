@@ -12,10 +12,10 @@
 #include <sstream>
 #include <chrono>
 #include <mutex>
-#include <future>
+
 #include <GLFW/src/glfw3.h>
 
-namespace Misc {
+namespace Utilities {
 
 	static std::mutex mu;
 
@@ -43,16 +43,6 @@ namespace Misc {
 		std::lock_guard<std::mutex> lock(mu);
 		std::cerr << GetDateTime() << " |" << err << "| " << emsg << std::endl;
 	}
-
-	const enum struct GameState {
-
-		HOMESCREEN,
-		TRYCONNECT,
-		CONNECTFAIL,
-		PLAYGAME,
-		GAMEOVER,
-		EXIT
-	};
 
 	double GetDeltaTime();
 	void UpdateDeltaTime();

@@ -158,12 +158,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="root\CarrierStrikeGroup\carrierstrikegroup.cpp" />
+    <ClCompile Include="root\CarrierStrikeGroup\ship.cpp" />
     <ClCompile Include="root\Connect\connect.cpp" />
     <ClCompile Include="root\Engine\engine.cpp" />
     <ClCompile Include="root\Engine\Input\button.cpp" />
     <ClCompile Include="root\Engine\Input\keyboard.cpp" />
     <ClCompile Include="root\Engine\Input\mouse.cpp" />
     <ClCompile Include="root\Engine\Math\math.cpp" />
+    <ClCompile Include="root\Game\game.cpp" />
     <ClCompile Include="root\Graphics\sprite.cpp" />
     <ClCompile Include="root\Graphics\text.cpp" />
     <ClCompile Include="root\Graphics\texture.cpp" />
@@ -172,12 +175,15 @@
     <ClCompile Include="root\Engine\Input\textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="root\CarrierStrikeGroup\carrierstrikegroup.h" />
+    <ClInclude Include="root\CarrierStrikeGroup\ship.h" />
     <ClInclude Include="root\Connect\connect.h" />
     <ClInclude Include="root\Engine\engine.h" />
     <ClInclude Include="root\Engine\Input\button.h" />
     <ClInclude Include="root\Engine\Input\keyboard.h" />
     <ClInclude Include="root\Engine\Input\mouse.h" />
     <ClInclude Include="root\Engine\Math\math.h" />
+    <ClInclude Include="root\Game\game.h" />
     <ClInclude Include="root\Graphics\sprite.h" />
     <ClInclude Include="root\Graphics\text.h" />
     <ClInclude Include="root\Graphics\texture.h" />

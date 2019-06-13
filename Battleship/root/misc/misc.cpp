@@ -4,9 +4,9 @@
 
 #include "misc.h"
 
-namespace Misc {
+namespace Utilities {
 
-	std::string Misc::GetDateTime() {
+	std::string Utilities::GetDateTime() {
 
 		auto timeNow = std::chrono::system_clock::now();
 		time_t timeNow_t = std::chrono::system_clock::to_time_t(timeNow);

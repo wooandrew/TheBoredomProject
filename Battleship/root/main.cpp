@@ -3,7 +3,10 @@
 // Website: https://wooandrew.github.io
 
 #include "Connect/connect.h"
+
 #include "lib.h"
+
+#include "Game/game.h"
 
 #include "Engine/engine.h"
 #include "Engine/Input/mouse.h"
@@ -25,25 +28,25 @@ int main() {
 	if (!gameLogExist) {
 
 		std::ofstream log(logname);
-		log << logname << " | Battleship GAME LOG generated @ " << Misc::GetDateTime() << std::endl;
+		log << logname << " | Battleship GAME LOG generated @ " << Utilities::GetDateTime() << std::endl;
 		log.close();
 	}
 	gameLogExist.close();
 	
 	std::ofstream log(logname, std::ios_base::app);
 	std::cerr.rdbuf(log.rdbuf());
-	Misc::Logger("----------------------------------------------------------------------------");
-	Misc::Logger("000x", "PROGRAM STARTED.");
+	Utilities::Logger("----------------------------------------------------------------------------");
+	Utilities::Logger("000x", "PROGRAM STARTED.");
 	// *** Event Log *** END ********************************************** *** //
 
 	// *** Initialize Engine *** START ************************************ *** //
 	Engine engine;
 	if (engine.init() == false) {
-		Misc::Logger("004e", "Fatal Error: Could not initialize game engine.");
+		Utilities::Logger("004e", "Fatal Error: Could not initialize game engine.");
 		return -1;
 	}
 	else {
-		Misc::Logger("005e", "Successfully initialized game engine.");
+		Utilities::Logger("005e", "Successfully initialized game engine.");
 	}
 	// *** Initialize Engine *** END ************************************** *** //
 
@@ -64,27 +67,39 @@ int main() {
 	Text abel;
 	abel.LoadFont("Assets/Fonts/abel.ttf", 46);
 
-	Misc::GameState CURRENTSTATE = Misc::GameState::HOMESCREEN;
+	MGO::GameState CURRENTSTATE = MGO::GameState::HOMESCREEN;
+	MGO::PlayState PLAYSTATE = MGO::PlayState::SETUP;
 
 	host = false;
 
+	// Utilities::GameState::HOMESCREEN objects
 	Image homescreen("Assets/Screens/homescreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
-	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, Misc::GameState::TRYCONNECT, true);
-	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, Misc::GameState::EXIT, true);
-	Button backbutton("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, Misc::GameState::HOMESCREEN, true);
+	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, MGO::GameState::TRYCONNECT, true);
+	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, MGO::GameState::EXIT, true);
+	Button backbutton("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, MGO::GameState::HOMESCREEN, true);
 
+	// Utilities::GameState::TRYCONNECT objects
 	Image connectscreen("Assets/Screens/connectscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
 	Button hostbutton("Assets/Buttons/host.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0), 1.0f, true);
 	Button connectbutton("Assets/Buttons/connect.png", glm::vec3(Engine::SCREEN_WIDTH / 2, 95, 0), 1.0f, false);
 	Textbox tbipaddr("Assets/Textboxes/ipaddr.png", glm::vec3(200, 170, 0), 1.0f);
 	Textbox tbport("Assets/Textboxes/port.png", glm::vec3(Engine::SCREEN_WIDTH - 130.5, 170, 0), 1.0f);
 
+	// Utilities::GameState::PLAYGAME objects
+	Image pSetup("Assets/Screens/setup.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+	//Convert Sprites -> Pieces
+	Sprite Carrier("Assets/Sprites/carrier.png", glm::vec3(545, 530, 0));
+	Sprite Cruiser("Assets/Sprites/cruiser.png", glm::vec3(545, 495, 0));
+	Sprite Destroyer1("Assets/Sprites/destroyer.png", glm::vec3(545, 460, 0));
+	Sprite Destroyer2("Assets/Sprites/destroyer.png", glm::vec3(545, 425, 0));
+	Sprite Supply("Assets/Sprites/supply.png", glm::vec3(545, 390, 0));
+	Sprite Submarine("Assets/Sprites/submarine.png", glm::vec3(545, 355, 0));
+
 	// *** Main Loop *** START *** **************************************** *** //
 	while (run) {
 
 		if (glfwWindowShouldClose(engine.GetWindow())) {
-			
-			CURRENTSTATE = Misc::GameState::EXIT;
+			CURRENTSTATE = MGO::GameState::EXIT;
 		}
 
 		// Update Events
@@ -94,18 +109,18 @@ int main() {
 		engine.BeginRender();
 		switch (CURRENTSTATE) {
 
-			case Misc::GameState::HOMESCREEN:
+			case MGO::GameState::HOMESCREEN:
 			{
 				CURRENTSTATE = playbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
 				CURRENTSTATE = exitbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
 
 				homescreen.Render();
-				playbutton.GetImage().Render();
-				exitbutton.GetImage().Render();				
+				playbutton.Render();
+				exitbutton.Render();				
 
 				break;
 			}
-			case Misc::GameState::TRYCONNECT:
+			case MGO::GameState::TRYCONNECT:
 			{
 				CURRENTSTATE = backbutton.Update(CURRENTSTATE, -130, 95);
 
@@ -132,9 +147,9 @@ int main() {
 
 				connectscreen.Render();
 
-				backbutton.GetImage().Render();
-				hostbutton.GetImage().Render();
-				connectbutton.GetImage().Render();
+				backbutton.Render();
+				hostbutton.Render();
+				connectbutton.Render();
 
 				tbipaddr.Render(std::ref(abel), 46);
 				tbport.Render(std::ref(abel), 46);
@@ -145,7 +160,8 @@ int main() {
 
 					if (gSocket != INVALID_SOCKET) {
 
-						CURRENTSTATE = Misc::GameState::PLAYGAME;
+						CURRENTSTATE = MGO::GameState::PLAYGAME;
+						PLAYSTATE = MGO::PlayState::SETUP;
 
 						tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
 
@@ -154,7 +170,7 @@ int main() {
 					}
 					else {
 
-						CURRENTSTATE = Misc::GameState::CONNECTFAIL;
+						CURRENTSTATE = MGO::GameState::CONNECTFAIL;
 
 						retSocket.~future();
 
@@ -165,35 +181,61 @@ int main() {
 
 				break;
 			}
-			case Misc::GameState::CONNECTFAIL:
+			case MGO::GameState::CONNECTFAIL:
 			{
-				CURRENTSTATE = Misc::GameState::HOMESCREEN;
+				CURRENTSTATE = MGO::GameState::HOMESCREEN;
 				std::cout << "CONNECT FAIL" << std::endl;
 				break;
 			}
-			case Misc::GameState::PLAYGAME:
+			case MGO::GameState::PLAYGAME:
 			{
 				if (gSocket != INVALID_SOCKET) {
 
-					if (Mouse::GetMouseX() > 300 && connected) {
-						Connect::SendData(std::ref(gSocket), "data\n");
+					switch (PLAYSTATE) {
+
+						case MGO::PlayState::SETUP:
+						{
+							pSetup.Render();
+
+							Carrier.Render();
+							Cruiser.Render();
+							Destroyer1.Render();
+							Destroyer2.Render();
+							Supply.Render();
+							Submarine.Render();
+
+							break;
+						}
+						case MGO::PlayState::P1TURN:
+							break;
+						case MGO::PlayState::P2TURN:
+							break;
+						default:
+						{
+							PLAYSTATE = MGO::PlayState::SETUP;
+							break;
+						}							
 					}
 				}
 				else {
-					CURRENTSTATE = Misc::GameState::GAMEOVER;
+					CURRENTSTATE = MGO::GameState::GAMEOVER;
 					fDisconnect = true;
 				}
 
 				break;
 			}
-			case Misc::GameState::GAMEOVER:
+			case MGO::GameState::GAMEOVER:
 			{
 				if (gSocket != INVALID_SOCKET) {
 					Connect::disconnect(std::ref(gSocket));
 				}
+
+				CURRENTSTATE = MGO::GameState::HOMESCREEN;
+				connected = false;
+
 				break;
 			}
-			case Misc::GameState::EXIT:
+			case MGO::GameState::EXIT:
 			{
 				if (gSocket != INVALID_SOCKET) {
 					Connect::disconnect(gSocket);
@@ -204,6 +246,11 @@ int main() {
 
 				break;
 			}
+			default:
+			{
+				CURRENTSTATE = MGO::GameState::HOMESCREEN;
+				break;
+			}
 		}
 
 		engine.EndRender();
@@ -211,7 +258,7 @@ int main() {
 	// *** Main Loop *** END *** ****************************************** *** //
 
 	// *** Cleanup *** **************************************************** *** //
-	Misc::Logger("001x", "Closed OpenGL window [glfwWindowShouldClose() = true].");
+	Utilities::Logger("001x", "Closed OpenGL window [glfwWindowShouldClose() = true].");
 	glfwTerminate();
 
 	if (retSocket.valid()) {
@@ -226,7 +273,7 @@ int main() {
 		tRecvLoop.join();
 	}
 
-	Misc::Logger("002x", "PROGRAM TERMINATED.");
+	Utilities::Logger("002x", "PROGRAM TERMINATED.");
 	log.close();
 
 	return 0;

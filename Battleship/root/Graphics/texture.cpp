@@ -16,10 +16,10 @@ Texture::Texture(int _id) : Texture() {
 	id = _id;
 
 	if (!GetTextureParams()) {
-		Misc::Logger("000t", "Error: Failed to get Texture parameters [GetTextureParams() = false].");
+		Utilities::Logger("000t", "Error: Failed to get Texture parameters [GetTextureParams() = false].");
 	}
 	else {
-		Misc::Logger("001t", "Successfully acquired Texture parameters [GetTextureParams() = true].");
+		Utilities::Logger("001t", "Successfully acquired Texture parameters [GetTextureParams() = true].");
 	}
 }
 
@@ -31,13 +31,13 @@ Texture::Texture(std::string path) : Texture() {
 
 		std::stringstream stream;
 		stream << "Error: Failed to load asset from [" << path << "] ___[GetTextureParams() = false].";
-		Misc::Logger("002t", stream.str());
+		Utilities::Logger("002t", stream.str());
 	}
 	else {
 
 		std::stringstream stream;
 		stream << "Successfully loaded asset from [" << path << "] ___ [GetTextureParams() = true].";
-		Misc::Logger("003t", stream.str());
+		Utilities::Logger("003t", stream.str());
 	}
 }
 

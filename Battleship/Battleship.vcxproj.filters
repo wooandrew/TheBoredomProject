@@ -51,6 +51,15 @@
     <ClCompile Include="root\Engine\Math\math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="root\CarrierStrikeGroup\carrierstrikegroup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\CarrierStrikeGroup\ship.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="root\Game\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="root\lib.h">
@@ -87,6 +96,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="root\Engine\Math\math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\CarrierStrikeGroup\carrierstrikegroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\CarrierStrikeGroup\ship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="root\Game\game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

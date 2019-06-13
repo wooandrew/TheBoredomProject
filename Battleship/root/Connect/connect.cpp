@@ -29,12 +29,12 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: WSAStartup() failed with error [" << iResult << "].";
-				Misc::Logger("000c", stream.str());
+				Utilities::Logger("000c", stream.str());
 
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("001c", "Successfully initialized Winsock [WSAStartup() = 0].");
+				Utilities::Logger("001c", "Successfully initialized Winsock [WSAStartup() = 0].");
 			}
 
 			ZeroMemory(&hints, sizeof(hints));
@@ -49,14 +49,14 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: getaddrinfo() failed with error [" << iResult << "].";
-				Misc::Logger("002c", stream.str());
+				Utilities::Logger("002c", stream.str());
 
 				WSACleanup();
 
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("003c", "xxxx_success [getaddrinfo() = 0].");
+				Utilities::Logger("003c", "xxxx_success [getaddrinfo() = 0].");
 			}
 
 			// Create a SOCKET for connecting to server
@@ -65,7 +65,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: socket() failed with error [" << WSAGetLastError() << "].";
-				Misc::Logger("004c", stream.str());
+				Utilities::Logger("004c", stream.str());
 
 				freeaddrinfo(result);
 				WSACleanup();
@@ -73,7 +73,7 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("005c", "Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].");
+				Utilities::Logger("005c", "Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].");
 			}
 
 			// Setup the TCP listening socket
@@ -82,7 +82,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: bind() failed with error [" << WSAGetLastError() << "].";
-				Misc::Logger("006c", stream.str());
+				Utilities::Logger("006c", stream.str());
 
 				freeaddrinfo(result);
 				closesocket(ListenSocket);
@@ -91,7 +91,7 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("007c", "Successfully set up listening socket [socket() != SOCKET_ERROR].");
+				Utilities::Logger("007c", "Successfully set up listening socket [socket() != SOCKET_ERROR].");
 			}
 
 			freeaddrinfo(result);
@@ -101,7 +101,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: listen() failed with error [" << WSAGetLastError() << "].";
-				Misc::Logger("008c", stream.str());
+				Utilities::Logger("008c", stream.str());
 
 				closesocket(ListenSocket);
 				WSACleanup();
@@ -109,10 +109,10 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("009c", "xxxx_success [listen() != SOCKET_ERROR].");
+				Utilities::Logger("009c", "xxxx_success [listen() != SOCKET_ERROR].");
 			}
 
-			Misc::Logger("Connecting...", true);
+			Utilities::Logger("Connecting...", true);
 
 			unsigned long iMode = 1;
 			ioctlsocket(ListenSocket, FIONBIO, &iMode);
@@ -129,7 +129,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: accept() failed with error [" << WSAGetLastError() << "].";
-				Misc::Logger("010c", stream.str());
+				Utilities::Logger("010c", stream.str());
 
 				closesocket(ListenSocket);
 				WSACleanup();
@@ -137,7 +137,7 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("011c", "xxxx_success [select() != 0].");
+				Utilities::Logger("011c", "xxxx_success [select() != 0].");
 			}
 
 			// Accept a client socket
@@ -147,7 +147,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Fatal Error: accept() failed with error [" << WSAGetLastError() << "].";
-				Misc::Logger("012c", stream.str());
+				Utilities::Logger("012c", stream.str());
 
 				closesocket(ListenSocket);
 				WSACleanup();
@@ -155,7 +155,7 @@ namespace Connect {
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("013c", "Successfully accepted client [accept() = ClientSocket != INVALID_SOCKET].");
+				Utilities::Logger("013c", "Successfully accepted client [accept() = ClientSocket != INVALID_SOCKET].");
 			}
 
 			// No longer need server socket
@@ -176,12 +176,12 @@ namespace Connect {
 				
 				std::stringstream stream;
 				stream << "Fatal Error: WSAStartup() failed with error [" << iResult << "].";
-				Misc::Logger("014c", stream.str());
+				Utilities::Logger("014c", stream.str());
 
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("015c", "Successfully initialized Winsock [WSAStartup() = 0].");
+				Utilities::Logger("015c", "Successfully initialized Winsock [WSAStartup() = 0].");
 			}
 
 			ZeroMemory(&hints, sizeof(hints));
@@ -195,14 +195,14 @@ namespace Connect {
 				
 				std::stringstream stream;
 				stream << "Fatal Error: getaddrinfo() failed with error [" << iResult << "].";
-				Misc::Logger("016c", stream.str());
+				Utilities::Logger("016c", stream.str());
 
 				WSACleanup();
 
 				return INVALID_SOCKET;
 			}
 			else {
-				Misc::Logger("017c", "xxxx_success [getaddrinfo() = 0].");
+				Utilities::Logger("017c", "xxxx_success [getaddrinfo() = 0].");
 			}
 
 			// Attempt to connect to an address until one succeeds
@@ -214,7 +214,7 @@ namespace Connect {
 					
 					std::stringstream stream;
 					stream << "Fatal Error: socket() failed with error [" << WSAGetLastError() << "].";
-					Misc::Logger("018c", stream.str());
+					Utilities::Logger("018c", stream.str());
 
 					freeaddrinfo(result);
 					WSACleanup();
@@ -222,7 +222,7 @@ namespace Connect {
 					return INVALID_SOCKET;
 				}
 				else {
-					Misc::Logger("019c", "Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].");
+					Utilities::Logger("019c", "Successfully created socket [socket() = ListenSocket != INVALID_SOCKET].");
 				}
 
 				// Connect to server.
@@ -243,7 +243,7 @@ namespace Connect {
 				
 				std::stringstream stream;
 				stream << "Failed to connect to [" << sipaddr << ":" << port << "].";
-				Misc::Logger("020c", stream.str());
+				Utilities::Logger("020c", stream.str());
 
 				WSACleanup();
 				
@@ -253,7 +253,7 @@ namespace Connect {
 
 				std::stringstream stream;
 				stream << "Successfully connected to [" << sipaddr << ":" << port << "].";
-				Misc::Logger("021c", stream.str());
+				Utilities::Logger("021c", stream.str());
 
 				return ConnectSocket;
 			}
@@ -313,7 +313,7 @@ namespace Connect {
 
 					std::stringstream stream;
 					stream << "Error: recv() failed with error [" << LastError << "].";
-					Misc::Logger("022c", stream.str());
+					Utilities::Logger("022c", stream.str());
 
 					disconnect(std::ref(gSocket));
 
@@ -328,15 +328,17 @@ namespace Connect {
 
 	void disconnect(SOCKET& gSocket) {
 
-		Misc::Logger("Closing connection...", true);
+		int iResult = send(gSocket, "exit", sizeof("exit"), 0);
+
+		Utilities::Logger("Closing connection...", true);
 
 		// Shutdown the connection
-		int iResult = shutdown(gSocket, SD_SEND);
+		iResult = shutdown(gSocket, SD_SEND);
 		if (iResult == SOCKET_ERROR) {
 
 			std::stringstream stream;
 			stream << "Fatal Error: shutdown() failed with error [" << WSAGetLastError() << "].";
-			Misc::Logger("024c", stream.str());
+			Utilities::Logger("024c", stream.str());
 
 			closesocket(gSocket);
 			WSACleanup();
@@ -346,7 +348,7 @@ namespace Connect {
 			return;
 		}
 		else {
-			Misc::Logger("025c", "Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].");
+			Utilities::Logger("025c", "Successfully shut down socket [shutdown(ClientSocket) != SOCKET_ERROR].");
 		}
 
 		// Cleanup

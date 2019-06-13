@@ -19,14 +19,14 @@ void Text::LoadFont(std::string fontPath, int fontSize) {
 
 		std::stringstream stream;
 		stream << "Error: Failed to load font from [" << fontPath << "].";
-		Misc::Logger("000f", stream.str());
+		Utilities::Logger("000f", stream.str());
 	}
 	else {
 		font.insert(std::pair<int, struct dtx_font*>(fontSize, fontStruct));
 
 		std::stringstream stream;
 		stream << "Successfully loaded font from [" << fontPath << "].";
-		Misc::Logger("001f", stream.str());
+		Utilities::Logger("001f", stream.str());
 	}
 }
 
