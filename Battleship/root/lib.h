@@ -2,6 +2,9 @@
 // Website: https://wooandrew.github.io/
 // Email: seungminleader@gmail.com
 
+// DEPRECATED FILE / CODING CONVENTION. TO CHANGE.
+// tHiS fILe iS cAnCer
+
 #pragma once
 
 #ifndef LIB_INCLUDE
@@ -17,6 +20,7 @@
 #include <fstream>			// main.cpp
 #include <thread>			// main.cpp
 #include <list>				// Game/game.h
+#include <atomic>			// Game/game.h
 #include <map>				// Graphics/text.h
 
 #include <GLEW/src/glew.h>

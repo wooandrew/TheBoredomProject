@@ -11,6 +11,7 @@
 
 #include "../Engine/engine.h"
 #include "../Engine/Input/mouse.h"
+#include "../Engine/Input/keyboard.h"
 #include "../Engine/Math/math.h"
 
 #include "../Graphics/sprite.h"
@@ -18,7 +19,7 @@
 class Ship {
 
 public:
-	
+
 	Ship(std::string path, glm::vec3 _position, float _scale = 1.0f);
 	Ship(Image& _iShip);
 

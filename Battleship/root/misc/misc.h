@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include <vector>
 #include <chrono>
 #include <mutex>
 
@@ -18,9 +19,6 @@
 namespace Utilities {
 
 	static std::mutex mu;
-
-	static double deltaTime = 0;
-	static double lastTime = 0;
 
 	std::string GetDateTime();
 
@@ -44,8 +42,35 @@ namespace Utilities {
 		std::cerr << GetDateTime() << " |" << err << "| " << emsg << std::endl;
 	}
 
-	double GetDeltaTime();
-	void UpdateDeltaTime();
+	template<typename T>
+	std::vector<std::string> split(T input, char delimiter = ' ') {
+
+		std::vector<std::string> ret;
+
+		std::stringstream ss_input;
+		ss_input << input;
+
+		std::istringstream iss_input(ss_input.str());
+		std::string token;
+
+		while (std::getline(iss_input, token, delimiter)) {
+			ret.push_back(token);
+		}
+
+		return ret;
+	}
+
+	struct DeltaTime {
+
+		DeltaTime() = delete;
+
+		static double GetDeltaTime();
+		static void UpdateDeltaTime();
+
+	private:
+		static double deltaTime;
+		static double lastTime;
+	};
 }
 
 #endif // !MISC_FUNCTIONS

@@ -59,7 +59,7 @@ public:
 			(mouseX > rect.x) && (static_cast<float>(mouseX) < rect.x + rect.width) &&
 			(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
 
-			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+			if (Mouse::ButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
 				buttonPressable = false;
 				return retVal;
 			}
@@ -89,7 +89,7 @@ public:
 
 				if (buttonimage.GetPosition()->x > xmin) {
 
-					double moveX = buttonimage.GetPosition()->x - (1000 * Utilities::GetDeltaTime());
+					double moveX = buttonimage.GetPosition()->x - (1000 * Utilities::DeltaTime::GetDeltaTime());
 					buttonimage.SetPosition(glm::vec3(moveX, buttonimage.GetPosition()->y, 0));
 					UpdateRect();
 				}
@@ -103,7 +103,7 @@ public:
 
 				if (buttonimage.GetPosition()->x < xmax) {
 
-					double moveX = buttonimage.GetPosition()->x + (1000 * Utilities::GetDeltaTime());
+					double moveX = buttonimage.GetPosition()->x + (1000 * Utilities::DeltaTime::GetDeltaTime());
 					buttonimage.SetPosition(glm::vec3(moveX, buttonimage.GetPosition()->y, 0));
 					UpdateRect();
 				}

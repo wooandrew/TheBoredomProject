@@ -11,6 +11,8 @@
 
 namespace Connect {
 
+	extern std::atomic<const char*> aRecvData;
+
 	SOCKET connect(bool host, std::string sipaddr = "127.0.0.1", std::string _port = "30980");
 	void disconnect(SOCKET& gSocket);
 
@@ -21,7 +23,7 @@ namespace Connect {
 
 		const char* data = static_cast<const char*>(senddata);
 
-		int iResult = send(gSocket, data, sizeof(data), 0);
+		int iResult = send(gSocket, data, strlen(data), 0);
 		if (iResult == SOCKET_ERROR) {
 
 			int LastError = WSAGetLastError();

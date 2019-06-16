@@ -8,6 +8,8 @@ constexpr auto DEFAULT_BUFLEN = 4098;
 
 namespace Connect {
 
+	std::atomic<const char*> aRecvData;
+
 	SOCKET connect(bool host, std::string sipaddr, std::string _port) {
 
 		const char* port = _port.c_str();
@@ -272,8 +274,11 @@ namespace Connect {
 		char recvbuf[DEFAULT_BUFLEN];
 		int recvbuflen = DEFAULT_BUFLEN;
 
+		std::string srecvbuf = "";
+
 		// Receive until the peer shuts down the connection
 		do {
+
 			if (!run) {
 
 				recvRun = false;
@@ -287,8 +292,7 @@ namespace Connect {
 			iResult = recv(gSocket, recvbuf, recvbuflen, 0);
 			if (iResult > 0) {
 
-				std::string srecvbuf = recvbuf;
-				std::cout << srecvbuf << std::endl;
+				srecvbuf = recvbuf;
 
 				if (srecvbuf == "exit") {
 
@@ -320,6 +324,8 @@ namespace Connect {
 					return 1;
 				}
 			}
+
+			aRecvData = srecvbuf.c_str();
 
 		} while (recvRun);
 

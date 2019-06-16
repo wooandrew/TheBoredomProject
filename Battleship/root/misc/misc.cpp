@@ -18,11 +18,14 @@ namespace Utilities {
 		return toString.str();
 	}
 
-	double GetDeltaTime() {
+	double DeltaTime::deltaTime = 0;
+	double DeltaTime::lastTime = 0;
+
+	double DeltaTime::GetDeltaTime() {
 		return deltaTime;
 	}
 
-	void UpdateDeltaTime() {
+	void DeltaTime::UpdateDeltaTime() {
 
 		double currentTime = glfwGetTime();
 		deltaTime = currentTime - lastTime;

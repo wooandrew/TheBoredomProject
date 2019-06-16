@@ -17,7 +17,17 @@
 #include "Graphics/text.h"
 #include "Graphics/sprite.h"
 
+#include "CarrierStrikeGroup/carrierstrikegroup.h"
+
 // RULE: Host goes first.
+
+/** Versioning
+ *
+ * Types: b.BUILD r.RELEASE
+ * Convention: type_commit_year
+**/
+
+constexpr auto build_version = "b7y19";
 
 int main() {
 
@@ -35,7 +45,11 @@ int main() {
 	
 	std::ofstream log(logname, std::ios_base::app);
 	std::cerr.rdbuf(log.rdbuf());
-	Utilities::Logger("----------------------------------------------------------------------------");
+	
+	std::stringstream stream;
+	stream << "----------------------------------------------------------------------------------------------------------------- " << build_version << " ----";
+	
+	Utilities::Logger(stream.str());
 	Utilities::Logger("000x", "PROGRAM STARTED.");
 	// *** Event Log *** END ********************************************** *** //
 
@@ -72,28 +86,44 @@ int main() {
 
 	host = false;
 
-	// Utilities::GameState::HOMESCREEN objects
+	// MiscGameObjects::GameState::HOMESCREEN objects
 	Image homescreen("Assets/Screens/homescreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
 	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, MGO::GameState::TRYCONNECT, true);
 	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, MGO::GameState::EXIT, true);
 	Button backbutton("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, MGO::GameState::HOMESCREEN, true);
 
-	// Utilities::GameState::TRYCONNECT objects
+	// MiscGameObjects::GameState::TRYCONNECT objects
 	Image connectscreen("Assets/Screens/connectscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
 	Button hostbutton("Assets/Buttons/host.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0), 1.0f, true);
 	Button connectbutton("Assets/Buttons/connect.png", glm::vec3(Engine::SCREEN_WIDTH / 2, 95, 0), 1.0f, false);
 	Textbox tbipaddr("Assets/Textboxes/ipaddr.png", glm::vec3(200, 170, 0), 1.0f);
 	Textbox tbport("Assets/Textboxes/port.png", glm::vec3(Engine::SCREEN_WIDTH - 130.5, 170, 0), 1.0f);
 
-	// Utilities::GameState::PLAYGAME objects
+	// MiscGameObjects::GameState::PLAYGAME objects
 	Image pSetup("Assets/Screens/setup.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
-	//Convert Sprites -> Pieces
-	Sprite Carrier("Assets/Sprites/carrier.png", glm::vec3(545, 530, 0));
-	Sprite Cruiser("Assets/Sprites/cruiser.png", glm::vec3(545, 495, 0));
-	Sprite Destroyer1("Assets/Sprites/destroyer.png", glm::vec3(545, 460, 0));
-	Sprite Destroyer2("Assets/Sprites/destroyer.png", glm::vec3(545, 425, 0));
-	Sprite Supply("Assets/Sprites/supply.png", glm::vec3(545, 390, 0));
-	Sprite Submarine("Assets/Sprites/submarine.png", glm::vec3(545, 355, 0));
+	Button readybutton("Assets/Buttons/ready.png", glm::vec3(90, 30, 0), 1.0f, false);
+	Button notreadybutton("Assets/Buttons/notready.png", glm::vec3(90, 30, 0), 1.0f, true);
+	Image ready("Assets/Buttons/ready.png", glm::vec3(250, 138, 0));
+	Image notready("Assets/Buttons/notready.png", glm::vec3(250, 138, 0));
+
+	std::vector<glm::vec3> SetupDefaultPositions;
+	SetupDefaultPositions.push_back(glm::vec3(545, 530, 0));
+	SetupDefaultPositions.push_back(glm::vec3(545, 495, 0));
+	SetupDefaultPositions.push_back(glm::vec3(545, 460, 0));
+	SetupDefaultPositions.push_back(glm::vec3(545, 425, 0));
+	SetupDefaultPositions.push_back(glm::vec3(545, 390, 0));
+	SetupDefaultPositions.push_back(glm::vec3(545, 355, 0));
+
+	CSG csg_setup(SetupDefaultPositions);
+
+	Grid SetupGrid;
+
+	// Game Objects
+	Player player1;
+	Player player2;
+
+	player1.Ready = false;
+	player2.Ready = false;
 
 	// *** Main Loop *** START *** **************************************** *** //
 	while (run) {
@@ -163,7 +193,13 @@ int main() {
 						CURRENTSTATE = MGO::GameState::PLAYGAME;
 						PLAYSTATE = MGO::PlayState::SETUP;
 
-						tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
+						try {
+							tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
+						}
+						catch(std::exception &e){
+							std::cout << &e << std::endl;
+						}
+						
 
 						connecting = false;
 						connected = true;
@@ -195,26 +231,110 @@ int main() {
 
 						case MGO::PlayState::SETUP:
 						{
+							SetupGrid.Update();
 							pSetup.Render();
 
-							Carrier.Render();
-							Cruiser.Render();
-							Destroyer1.Render();
-							Destroyer2.Render();
-							Supply.Render();
-							Submarine.Render();
+							csg_setup.Update(true);
+							csg_setup.Render();
+
+							if (Connect::aRecvData != NULL) { // Parse Recieved Data
+								
+								std::vector<std::string> vaRecvData = Utilities::split(Connect::aRecvData.load());
+								for (std::string datum : vaRecvData) {
+									
+									if (datum == "host:not_ready") {
+										player1.Ready = false;
+									}
+									else if (datum == "host:ready") {
+										player1.Ready = true;
+									}
+									else if (datum == "p2:not_ready") {
+										player2.Ready = false;
+									}
+									else if (datum == "p2:ready") {
+										player2.Ready = true;
+									}
+								}
+							}
+
+							if (host) {
+
+								if (player1.Ready) {
+
+									player1.Ready = readybutton.Update(player1.Ready);
+									readybutton.Render();
+
+									if (!player1.Ready) {
+										Connect::SendData(std::ref(gSocket), "host:not_ready");
+									}
+								}
+								else {
+
+									player1.Ready = notreadybutton.Update(player1.Ready);
+									notreadybutton.Render();
+
+									if (player1.Ready) {
+										Connect::SendData(std::ref(gSocket), "host:ready");
+									}
+								}
+
+								if (player2.Ready) {
+									ready.Render();
+								}
+								else {
+									notready.Render();
+								}
+							}
+							else {
+
+								if (player2.Ready) {
+
+									player2.Ready = readybutton.Update(player2.Ready);
+									readybutton.Render();
+
+									if (!player2.Ready) {
+										Connect::SendData(std::ref(gSocket), "p2:not_ready");
+									}
+								}
+								else {
+
+									player2.Ready = notreadybutton.Update(player2.Ready);
+									notreadybutton.Render();
+
+									if (player2.Ready) {
+										Connect::SendData(std::ref(gSocket), "p2:ready");
+									}
+								}
+
+								if (player1.Ready) {
+									ready.Render();
+								}
+								else {
+									notready.Render();
+								}
+							}
+
+							if (player1.Ready && player2.Ready) {
+								PLAYSTATE = MGO::PlayState::P1TURN;
+							}
 
 							break;
 						}
 						case MGO::PlayState::P1TURN:
+						{
+
 							break;
+						}
 						case MGO::PlayState::P2TURN:
+						{
+
 							break;
+						}
 						default:
 						{
 							PLAYSTATE = MGO::PlayState::SETUP;
 							break;
-						}							
+						}
 					}
 				}
 				else {
@@ -228,6 +348,7 @@ int main() {
 			{
 				if (gSocket != INVALID_SOCKET) {
 					Connect::disconnect(std::ref(gSocket));
+					tRecvLoop.join();
 				}
 
 				CURRENTSTATE = MGO::GameState::HOMESCREEN;

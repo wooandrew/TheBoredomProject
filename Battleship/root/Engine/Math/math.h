@@ -20,7 +20,6 @@ namespace Rect {
 		float width;
 		float height;
 	};
-
 }
 
 #endif // !ENGINE_MATH

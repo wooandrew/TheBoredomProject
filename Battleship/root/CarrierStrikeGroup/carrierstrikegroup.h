@@ -8,17 +8,38 @@
 #define CARRIER_STRIKE_GROUP
 
 #include "../lib.h"
+#include "ship.h"
+
+struct Ships {
+
+	Ship AircraftCarrier;
+	Ship Cruiser;
+	Ship Destroyer1;
+	Ship Destroyer2;
+	Ship Supply;
+	Ship Submarine;
+
+	Ships(std::vector<glm::vec3> defPos);
+
+	void Update(bool setup = false);
+	void Render() const;
+};
 
 class CarrierStrikeGroup {
 
 public:
 
-	CarrierStrikeGroup();
+	CarrierStrikeGroup(std::vector<glm::vec3> defPos);
 
-	void Assemble();
+	void Update(bool setup = false);
+	void Render() const;
+
+	bool GetReady() const;
 
 private:
 
+	bool ready;
+	Ships StrikeGroup;
 };
 
 typedef CarrierStrikeGroup CSG;

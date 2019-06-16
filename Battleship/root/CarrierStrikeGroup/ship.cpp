@@ -30,20 +30,48 @@ void Ship::Update(bool setup) {
 
 	if (setup) {
 
+		double mouseX = Mouse::GetMouseX();
+		double mouseY = Mouse::GetMouseY();
+
 		if (selected) {
+
+			if (Mouse::ButtonDown(GLFW_MOUSE_BUTTON_RIGHT)) {
+
+				selected = false;
+
+				iShip.SetPosition(defaultPosition);
+				iShip.RotateTo(0);
+
+				UpdateRect();
+
+				return;
+			}
+			else if (Keyboard::KeyDown(GLFW_KEY_R)) {
+
+				static int rotation = 90;
+
+				if (rotation == 90) {
+					iShip.RotateTo(static_cast<float>(rotation));
+					rotation = 0;
+				}
+				else {
+					iShip.RotateTo(static_cast<float>(rotation));
+					rotation = 90;
+				}
+					
+				UpdateRect();
+			}
+
 			iShip.SetPosition(glm::vec3(Mouse::GetMouseX(), Mouse::GetMouseY(), 0));
 			UpdateRect();
 		}
 		else {
 
-			double mouseX = Mouse::GetMouseX();
-			double mouseY = Mouse::GetMouseY();
-
 			if ((mouseX < Engine::SCREEN_WIDTH) && (mouseX > 0) && (mouseY < Engine::SCREEN_HEIGHT) && (mouseY > 0) &&
 				(mouseX > rect.x) && (static_cast<float>(mouseX) < rect.x + rect.width) &&
 				(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
 
-				if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+				if (Mouse::ButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
 					selected = true;
 				}
 			}

@@ -73,7 +73,7 @@ bool Engine::init(char* windowTitle) {
 }
 
 void Engine::Update() const {
-	Utilities::UpdateDeltaTime();
+	Utilities::DeltaTime::UpdateDeltaTime();
 	glfwPollEvents();
 }
 

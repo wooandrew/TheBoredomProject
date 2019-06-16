@@ -7,14 +7,53 @@
 #ifndef BATTLESHIP_GAME
 #define BATTLESHIP_GAME
 
+#include "../lib.h"
+
+#include "../Engine/engine.h"
+#include "../Engine/Input/mouse.h"
+#include "../Engine/Math/math.h"
+#include "../Graphics/sprite.h"
+
+struct Player {
+
+	/*
+	Struct containing all player data.
+	*/
+	
+	std::atomic<bool> Ready;
+};
+
+class GridSquare {
+
+public:
+
+	GridSquare(std::string path, std::string _id, glm::vec3 _position, float _scale = 1.0f);
+
+	void Render() const;
+
+	std::string GetID() const;
+	Rect::XYWH GetRect() const;
+
+private:
+
+	const std::string id;
+
+	Image iGridSquare;
+	Rect::XYWH rect;
+};
+
 class Grid {
 
 public:
 
 	Grid();
 
+	void Update();
+	void Render() const; // Debug
+
 private:
 
+	std::vector<GridSquare> vGrid;
 };
 
 namespace MiscGameObjects {
@@ -36,7 +75,6 @@ namespace MiscGameObjects {
 		P2TURN
 	};
 }
-
 namespace MGO = MiscGameObjects;
 
 #endif // !BATTLESHIP_GAME
