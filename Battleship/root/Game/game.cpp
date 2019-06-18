@@ -26,6 +26,14 @@ Rect::XYWH GridSquare::GetRect() const {
 	return rect;
 }
 
+Image* GridSquare::GetImage() {
+	return &iGridSquare;
+}
+
+glm::vec3* GridSquare::GetPosition() {
+	return iGridSquare.GetPosition();
+}
+
 Grid::Grid() {
 
 	float x = 20;
@@ -56,7 +64,7 @@ Grid::Grid() {
 		std::stringstream _id;
 		_id << baseRow << baseCol;
 
-		vGrid.push_back(GridSquare("Assets/Sprites/gridsquare.png", _id.str(), glm::vec3(x, y, 0)));
+		vGrid.push_back(GridSquare("Assets/gridsquare.png", _id.str(), glm::vec3(x, y, 0)));
 	}
 }
 
@@ -74,8 +82,7 @@ void Grid::Update() {
 			(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
 
 			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
-				//std::cout << vGrid[x].GetID() << std::endl;
-				continue;
+				std::cout << vGrid[x].GetID() << std::endl;
 			}
 		}
 	}
@@ -85,5 +92,10 @@ void Grid::Render() const {
 
 	for (unsigned int x = 0; x < vGrid.size(); x++) {
 		vGrid[x].Render();
+		//std::cout << vGrid[x].GetID() << std::endl;
 	}
+}
+
+std::vector<GridSquare> Grid::GetGrid() const {
+	return vGrid;
 }

@@ -16,25 +16,40 @@
 
 #include "../Graphics/sprite.h"
 
+#include "../Game/game.h"
+
+const enum struct ShipType {
+
+	AircraftCarrier,
+	Cruiser,
+	Destroyer,
+	Supply,
+	Submarine
+};
+
 class Ship {
 
 public:
 
-	Ship(std::string path, glm::vec3 _position, float _scale = 1.0f);
-	Ship(Image& _iShip);
+	Ship(std::string path, ShipType _type, glm::vec3 _position, float _scale = 1.0f);
+	Ship(Image& _iShip, ShipType _type);
 
-	void Update(bool setup = false);
+	void Update(Grid& _grid, bool setup = false);
 	void Render() const;
 
 	void UpdateRect();
+	bool GetPlaced() const;
 
 private:
 
 	Image iShip;
 
 	bool selected;
+	bool placed;
+
 	Rect::XYWH rect;
 
+	const ShipType type;
 	const glm::vec3 defaultPosition;
 };
 

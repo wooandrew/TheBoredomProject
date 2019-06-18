@@ -13,12 +13,14 @@ namespace Rect {
 
 	struct XYWH {
 
-		friend std::ostream& operator<<(std::ostream& os, Rect::XYWH right);
+		friend std::ostream& operator<<(std::ostream& os, const Rect::XYWH right);
 
 		float x;
 		float y;
 		float width;
 		float height;
+
+		bool CheckCollisionAABB(const XYWH& rect2);
 	};
 }
 

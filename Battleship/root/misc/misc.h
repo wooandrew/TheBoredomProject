@@ -47,10 +47,10 @@ namespace Utilities {
 
 		std::vector<std::string> ret;
 
-		std::stringstream ss_input;
-		ss_input << input;
+		std::ostringstream oss_input;
+		oss_input << input;
 
-		std::istringstream iss_input(ss_input.str());
+		std::istringstream iss_input(oss_input.str());
 		std::string token;
 
 		while (std::getline(iss_input, token, delimiter)) {

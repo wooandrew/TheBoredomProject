@@ -21,6 +21,8 @@ struct Player {
 	*/
 	
 	std::atomic<bool> Ready;
+	std::atomic<const char*> cc_ViableSquares;
+	std::vector<std::string> ViableSquareIDs;
 };
 
 class GridSquare {
@@ -33,6 +35,9 @@ public:
 
 	std::string GetID() const;
 	Rect::XYWH GetRect() const;
+	
+	Image* GetImage();
+	glm::vec3* GetPosition();
 
 private:
 
@@ -50,6 +55,8 @@ public:
 
 	void Update();
 	void Render() const; // Debug
+
+	std::vector<GridSquare> GetGrid() const;
 
 private:
 

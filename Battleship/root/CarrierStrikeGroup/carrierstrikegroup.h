@@ -8,7 +8,9 @@
 #define CARRIER_STRIKE_GROUP
 
 #include "../lib.h"
+
 #include "ship.h"
+#include "../Game/game.h"
 
 struct Ships {
 
@@ -19,9 +21,11 @@ struct Ships {
 	Ship Supply;
 	Ship Submarine;
 
+	bool ready;
+
 	Ships(std::vector<glm::vec3> defPos);
 
-	void Update(bool setup = false);
+	void Update(Grid& _grid, bool setup = false);
 	void Render() const;
 };
 
@@ -31,7 +35,7 @@ public:
 
 	CarrierStrikeGroup(std::vector<glm::vec3> defPos);
 
-	void Update(bool setup = false);
+	void Update(Grid& _grid, bool setup = false);
 	void Render() const;
 
 	bool GetReady() const;

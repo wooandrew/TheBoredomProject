@@ -27,24 +27,24 @@
  * Convention: type_commit_year
 **/
 
-constexpr auto build_version = "b7y19";
+constexpr auto build_version = "b8y19";
 
 int main() {
 
 	// *** Event Log *** START ******************************************** *** //
 	system("TITLE Battleship Debug Console");
-	std::string logname = "battleship.logx";
-	std::ifstream gameLogExist(logname);
-	if (!gameLogExist) {
-
-		std::ofstream log(logname);
-		log << logname << " | Battleship GAME LOG generated @ " << Utilities::GetDateTime() << std::endl;
-		log.close();
-	}
-	gameLogExist.close();
-	
-	std::ofstream log(logname, std::ios_base::app);
-	std::cerr.rdbuf(log.rdbuf());
+	//std::string logname = "battleship.logx";
+	//std::ifstream gameLogExist(logname);
+	//if (!gameLogExist) {
+	//
+	//	std::ofstream log(logname);
+	//	log << logname << " | Battleship GAME LOG generated @ " << Utilities::GetDateTime() << std::endl;
+	//	log.close();
+	//}
+	//gameLogExist.close();
+	//
+	//std::ofstream log(logname, std::ios_base::app);
+	//std::cerr.rdbuf(log.rdbuf());
 	
 	std::stringstream stream;
 	stream << "----------------------------------------------------------------------------------------------------------------- " << build_version << " ----";
@@ -94,17 +94,17 @@ int main() {
 
 	// MiscGameObjects::GameState::TRYCONNECT objects
 	Image connectscreen("Assets/Screens/connectscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
-	Button hostbutton("Assets/Buttons/host.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0), 1.0f, true);
-	Button connectbutton("Assets/Buttons/connect.png", glm::vec3(Engine::SCREEN_WIDTH / 2, 95, 0), 1.0f, false);
+	Button hostbutton("Assets/Buttons/hostbutton.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0), 1.0f, true);
+	Button connectbutton("Assets/Buttons/connectbutton.png", glm::vec3(Engine::SCREEN_WIDTH / 2, 95, 0), 1.0f, false);
 	Textbox tbipaddr("Assets/Textboxes/ipaddr.png", glm::vec3(200, 170, 0), 1.0f);
 	Textbox tbport("Assets/Textboxes/port.png", glm::vec3(Engine::SCREEN_WIDTH - 130.5, 170, 0), 1.0f);
 
 	// MiscGameObjects::GameState::PLAYGAME objects
 	Image pSetup("Assets/Screens/setup.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
-	Button readybutton("Assets/Buttons/ready.png", glm::vec3(90, 30, 0), 1.0f, false);
-	Button notreadybutton("Assets/Buttons/notready.png", glm::vec3(90, 30, 0), 1.0f, true);
-	Image ready("Assets/Buttons/ready.png", glm::vec3(250, 138, 0));
-	Image notready("Assets/Buttons/notready.png", glm::vec3(250, 138, 0));
+	Button readybutton("Assets/Buttons/readybutton.png", glm::vec3(90, 30, 0), 1.0f, false);
+	Button notreadybutton("Assets/Buttons/notreadybutton.png", glm::vec3(90, 30, 0), 1.0f, true);
+	Image ready("Assets/ready.png", glm::vec3(250, 138, 0));
+	Image notready("Assets/notready.png", glm::vec3(250, 138, 0));
 
 	std::vector<glm::vec3> SetupDefaultPositions;
 	SetupDefaultPositions.push_back(glm::vec3(545, 530, 0));
@@ -193,13 +193,13 @@ int main() {
 						CURRENTSTATE = MGO::GameState::PLAYGAME;
 						PLAYSTATE = MGO::PlayState::SETUP;
 
-						try {
-							tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
-						}
-						catch(std::exception &e){
-							std::cout << &e << std::endl;
-						}
-						
+						tRecvLoop = std::thread(Connect::RecvData, std::ref(run), std::ref(gSocket));
+						//catch(std::exception &e){
+						//
+						//	std::ostringstream stream;
+						//	stream << "Error: exception [" << &e << "] occured.";
+						//	Utilities::Logger(stream.str(), true);
+						//}
 
 						connecting = false;
 						connected = true;
@@ -231,11 +231,8 @@ int main() {
 
 						case MGO::PlayState::SETUP:
 						{
-							SetupGrid.Update();
 							pSetup.Render();
-
-							csg_setup.Update(true);
-							csg_setup.Render();
+							SetupGrid.Render();
 
 							if (Connect::aRecvData != NULL) { // Parse Recieved Data
 								
@@ -257,9 +254,9 @@ int main() {
 								}
 							}
 
-							if (host) {
+							if (host) { // If host
 
-								if (player1.Ready) {
+								if (player1.Ready) { // Host is ready
 
 									player1.Ready = readybutton.Update(player1.Ready);
 									readybutton.Render();
@@ -268,11 +265,15 @@ int main() {
 										Connect::SendData(std::ref(gSocket), "host:not_ready");
 									}
 								}
-								else {
+								else { // Host is not ready
 
-									player1.Ready = notreadybutton.Update(player1.Ready);
+									csg_setup.Update(SetupGrid, true);
 									notreadybutton.Render();
 
+									if (csg_setup.GetReady()) {
+										player1.Ready = notreadybutton.Update(player1.Ready);
+									}
+									
 									if (player1.Ready) {
 										Connect::SendData(std::ref(gSocket), "host:ready");
 									}
@@ -285,9 +286,9 @@ int main() {
 									notready.Render();
 								}
 							}
-							else {
+							else { // If NOT host
 
-								if (player2.Ready) {
+								if (player2.Ready) { // Player 2 is ready
 
 									player2.Ready = readybutton.Update(player2.Ready);
 									readybutton.Render();
@@ -296,10 +297,14 @@ int main() {
 										Connect::SendData(std::ref(gSocket), "p2:not_ready");
 									}
 								}
-								else {
+								else { // Player 2 is not ready
 
-									player2.Ready = notreadybutton.Update(player2.Ready);
+									csg_setup.Update(SetupGrid, true);
 									notreadybutton.Render();
+
+									if (csg_setup.GetReady()) {
+										player2.Ready = notreadybutton.Update(player2.Ready);
+									}
 
 									if (player2.Ready) {
 										Connect::SendData(std::ref(gSocket), "p2:ready");
@@ -317,6 +322,8 @@ int main() {
 							if (player1.Ready && player2.Ready) {
 								PLAYSTATE = MGO::PlayState::P1TURN;
 							}
+
+							csg_setup.Render();
 
 							break;
 						}
@@ -348,8 +355,12 @@ int main() {
 			{
 				if (gSocket != INVALID_SOCKET) {
 					Connect::disconnect(std::ref(gSocket));
+				}
+
+				if (tRecvLoop.joinable()) {
 					tRecvLoop.join();
 				}
+				tRecvLoop = std::thread();
 
 				CURRENTSTATE = MGO::GameState::HOMESCREEN;
 				connected = false;
@@ -395,7 +406,7 @@ int main() {
 	}
 
 	Utilities::Logger("002x", "PROGRAM TERMINATED.");
-	log.close();
+	//log.close(); // Remove __ RAII
 
 	return 0;
 }
