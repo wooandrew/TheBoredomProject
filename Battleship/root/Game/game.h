@@ -14,16 +14,7 @@
 #include "../Engine/Math/math.h"
 #include "../Graphics/sprite.h"
 
-struct Player {
-
-	/*
-	Struct containing all player data.
-	*/
-	
-	std::atomic<bool> Ready;
-	std::atomic<const char*> cc_ViableSquares;
-	std::vector<std::string> ViableSquareIDs;
-};
+#include "player.h"
 
 class GridSquare {
 
@@ -39,28 +30,47 @@ public:
 	Image* GetImage();
 	glm::vec3* GetPosition();
 
-private:
+	friend bool operator==(const GridSquare& left, const GridSquare& right);
 
-	const std::string id;
+private:
 
 	Image iGridSquare;
 	Rect::XYWH rect;
+
+protected:
+
+	const std::string id;
 };
 
 class Grid {
 
 public:
 
-	Grid();
+	Grid(int GridSize = 40);
 
 	void Update();
-	void Render() const; // Debug
+	void Render(bool debug = false) const; // Debug
+	void Reset();
+
+	void MakeIllegal(GridSquare square);
+	void MakeLegal(GridSquare square);
+	bool IsLegal(GridSquare square);
 
 	std::vector<GridSquare> GetGrid() const;
+	std::pair<Image, Rect::XYWH> GetGridSpace() const;
+	std::list<GridSquare> GetIllegalSquares() const;
+	std::string GetPressedSquare() const;
+	
+	friend void PrintIllegalSquares(Grid _grid); // Debug
 
 private:
 
 	std::vector<GridSquare> vGrid;
+	std::pair<Image, Rect::XYWH> GridSpace;
+
+protected:
+
+	std::list<GridSquare> IllegalSquares;
 };
 
 namespace MiscGameObjects {
@@ -83,5 +93,8 @@ namespace MiscGameObjects {
 	};
 }
 namespace MGO = MiscGameObjects;
+
+std::pair<std::string, std::string> ParseRecvData(const char* ccRecvData);
+void ParseRecvData(Player& player, const char* ccRecvData);
 
 #endif // !BATTLESHIP_GAME

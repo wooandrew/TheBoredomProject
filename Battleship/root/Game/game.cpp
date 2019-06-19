@@ -34,10 +34,36 @@ glm::vec3* GridSquare::GetPosition() {
 	return iGridSquare.GetPosition();
 }
 
-Grid::Grid() {
+bool operator==(const GridSquare& left, const GridSquare& right) {
 
-	float x = 20;
-	float y = 580;
+	if (left.id == right.id) {
+		return true;
+	}
+
+	return false;
+}
+
+Grid::Grid(int GridSize) {
+
+	const char* pGridSpace = "Assets/gridspace.png";
+	const char* pGridSquare = "Assets/gridsquare.png";
+
+	if (GridSize == 54) {
+		pGridSpace = "Assets/gridspacefull.png";
+		pGridSquare = "Assets/gridsquarefull.png";
+	}
+
+	Image iGridSpace(pGridSpace, glm::vec3(GridSize * 6, Engine::SCREEN_HEIGHT - (GridSize * 6), 0), 1.0f);
+	Rect::XYWH GSRect;
+	GSRect.x = iGridSpace.GetPosition()->x - ((iGridSpace.GetScale()->x * iGridSpace.GetSize()->x) / 2);
+	GSRect.y = iGridSpace.GetPosition()->y - ((iGridSpace.GetScale()->y * iGridSpace.GetSize()->y) / 2);
+	GSRect.width = iGridSpace.GetScale()->x * iGridSpace.GetSize()->x;
+	GSRect.height = iGridSpace.GetScale()->y * iGridSpace.GetSize()->y;
+
+	GridSpace = std::make_pair(iGridSpace, GSRect);
+
+	float x = std::floor(static_cast<float>(GridSize / 2));
+	float y = 600 - std::floor(static_cast<float>(GridSize / 2));
 
 	char rows[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 	char cols[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -51,20 +77,20 @@ Grid::Grid() {
 
 		if (z % 10 == 0) {
 
-			y -= 40;
-			x = 20;
+			y -= GridSize;
+			x = std::floor(static_cast<float>(GridSize / 2));
 
 			baseRow = rows[br];
 			br++;
 		}
 
-		x += 40;
+		x += GridSize;
 		baseCol = cols[z % 10];
 
 		std::stringstream _id;
 		_id << baseRow << baseCol;
 
-		vGrid.push_back(GridSquare("Assets/gridsquare.png", _id.str(), glm::vec3(x, y, 0)));
+		vGrid.push_back(GridSquare(pGridSquare, _id.str(), glm::vec3(x + ((GridSize == 54) ? 2 : 0), y - ((GridSize == 54) ? 2 : 0), 0)));
 	}
 }
 
@@ -82,20 +108,151 @@ void Grid::Update() {
 			(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
 
 			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
-				std::cout << vGrid[x].GetID() << std::endl;
+				//std::cout << vGrid[x].GetID() << std::endl;
 			}
 		}
 	}
 }
 
-void Grid::Render() const {
+void Grid::Render(bool debug) const {
 
-	for (unsigned int x = 0; x < vGrid.size(); x++) {
-		vGrid[x].Render();
-		//std::cout << vGrid[x].GetID() << std::endl;
+	if (debug) {
+
+		//GridSpace.first.Render();
+
+		for (unsigned int x = 0; x < vGrid.size(); x++) {
+			vGrid[x].Render();
+		}
 	}
+}
+
+void Grid::Reset() {
+	IllegalSquares.clear();
+}
+
+void Grid::MakeIllegal(GridSquare square) {
+
+	for (const GridSquare tGridSquare : IllegalSquares) {
+		
+		if (tGridSquare == square) {
+			return;
+		}
+	}
+
+	IllegalSquares.push_back(square);
+}
+
+void Grid::MakeLegal(GridSquare square) {
+	IllegalSquares.remove(square);
+}
+
+bool Grid::IsLegal(GridSquare square) {
+
+	for (const GridSquare tGridSquare : IllegalSquares) {
+
+		if (tGridSquare == square) {
+			return false;
+		}
+	}
+
+	return true;
 }
 
 std::vector<GridSquare> Grid::GetGrid() const {
 	return vGrid;
+}
+
+std::pair<Image, Rect::XYWH> Grid::GetGridSpace() const {
+	return GridSpace;
+}
+
+std::list<GridSquare> Grid::GetIllegalSquares() const {
+	return IllegalSquares;
+};
+
+std::string Grid::GetPressedSquare() const {
+
+	for (unsigned int x = 0; x < vGrid.size(); x++) {
+
+		double mouseX = Mouse::GetMouseX();
+		double mouseY = Mouse::GetMouseY();
+
+		Rect::XYWH rect = vGrid[x].GetRect();
+
+		if ((mouseX < Engine::SCREEN_WIDTH) && (mouseX > 0) && (mouseY < Engine::SCREEN_HEIGHT) && (mouseY > 0) &&
+			(mouseX > rect.x) && (static_cast<float>(mouseX) < rect.x + rect.width) &&
+			(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
+
+			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
+				return vGrid[x].GetID();
+			}
+		}
+	}
+	return "NOPRESS";
+}
+
+void PrintIllegalSquares(Grid _grid) { // Debug Function
+
+	for (const GridSquare tGridSquare : _grid.IllegalSquares) {
+		std::cout << tGridSquare.GetID() << std::endl;
+	}
+	std::cout << "-----" << std::endl;
+}
+
+std::pair<std::string, std::string> ParseRecvData(const char* ccRecvData) {
+
+	std::vector<std::string> vaRecvData = Utilities::split(ccRecvData, ':');
+
+	for (std::string datum : vaRecvData) {
+
+		if (datum == "attack") {
+			return std::make_pair(vaRecvData[0], vaRecvData[1]);
+		}
+	}
+
+	return std::make_pair("NULLDATA", "NULLDATA");
+}
+
+void ParseRecvData(Player& player, const char* ccRecvData) {
+
+	std::vector<std::string> vaRecvData = Utilities::split(ccRecvData, '&');
+
+	for (std::string datum : vaRecvData) {
+
+		if (datum == "not_ready") {
+			player.Ready = false;
+		}
+		else if (datum == "ready") {
+			player.Ready = true;
+		}
+		else {
+
+			std::vector<std::string> csi = Utilities::split(datum, ':');
+
+			if (csi[0] == "illegal_squares") {
+
+				player.ViableSquareIDs.clear();
+
+				for (unsigned int x = 1; x < csi.size(); x++) {
+					player.ViableSquareIDs.push_back(csi[x]);
+				}
+			}
+			else if (csi[0] == "placed_ids") {
+
+				player.PlacedIDs.clear();
+
+				for (unsigned int x = 1; x < csi.size(); x++) {
+					player.PlacedIDs.push_back(csi[x]);
+				}
+			}
+			else if (csi[0] == "csg_rotations") { // Unused
+
+				player.ShipRotations.clear();
+
+				for (unsigned int x = 1; x < csi.size(); x++) {
+					player.ShipRotations.push_back(csi[x]);
+				}
+			}
+		}
+	}
 }

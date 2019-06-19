@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="playscreen.svg"
-   inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Screens\setup.png"
+   inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Screens\play.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -69,9 +69,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7071068"
-     inkscape:cx="503.0803"
-     inkscape:cy="53.563632"
+     inkscape:zoom="0.99999999"
+     inkscape:cx="426.89962"
+     inkscape:cy="336.32138"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -83,9 +83,14 @@
      inkscape:window-maximized="1"
      showguides="true"
      inkscape:guide-bbox="true">
+    <sodipodi:guide
+       position="14.2875,102.39375"
+       orientation="1,0"
+       id="guide951"
+       inkscape:locked="false" />
     <inkscape:grid
        type="xygrid"
-       id="grid817" />
+       id="grid951" />
   </sodipodi:namedview>
   <metadata
      id="metadata5">
@@ -124,13 +129,13 @@
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Saira SemiCondensed SemiBold';-inkscape-font-specification:'Saira SemiCondensed SemiBold, ';stroke-width:0.26458332;" /></text>
     <text
        id="text83"
-       y="149.19994"
-       x="132.28384"
+       y="313.0896"
+       x="105.34308"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;line-height:1.25;font-family:Abel;-inkscape-font-specification:'Abel, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.26458332;filter:url(#filter897)"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.28888893px;font-family:Abel;-inkscape-font-specification:'Abel, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#1a1a1a;stroke-width:0.26458332"
-         y="149.19994"
-         x="132.28384"
+         y="313.0896"
+         x="105.34308"
          id="tspan81"
          sodipodi:role="line">Ships:</tspan></text>
     <text
@@ -201,7 +206,8 @@
          inkscape:connector-curvature="0" />
     </g>
     <g
-       id="g1413">
+       id="g1413"
+       transform="matrix(1.3636362,0,0,1.3636362,0,-50.272702)">
       <text
          id="text42"
          y="147.49008"
@@ -536,8 +542,8 @@
     </g>
     <g
        id="g1424"
-       transform="translate(239.652,4.2333336)"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\carrier.png"
+       transform="matrix(1.3636362,0,0,1.3636362,183.74335,-53.52793)"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\carrierfull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <rect
@@ -561,7 +567,7 @@
     </g>
     <g
        id="g1432"
-       transform="translate(245.0308,15.037708)">
+       transform="matrix(1.3636362,0,0,1.3636362,191.07808,-38.794693)">
       <g
          id="g1437">
         <rect
@@ -585,9 +591,9 @@
       </g>
     </g>
     <g
-       transform="translate(245.0308,15.037708)"
+       transform="matrix(1.3636362,0,0,1.3636362,191.07808,-38.794693)"
        id="g1447"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\cruiser.png"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\cruiserfull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <g
@@ -614,7 +620,7 @@
     </g>
     <g
        id="g1457"
-       transform="translate(250.26928,36.178728)">
+       transform="matrix(1.3636362,0,0,1.3636362,198.22146,-9.966032)">
       <g
          id="g1455">
         <rect
@@ -638,9 +644,9 @@
       </g>
     </g>
     <g
-       transform="translate(250.26928,25.547172)"
+       transform="matrix(1.3636362,0,0,1.3636362,198.22146,-24.463607)"
        id="g1467"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\destroyer.png"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\destroyerfull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <g
@@ -666,9 +672,9 @@
       </g>
     </g>
     <g
-       transform="translate(255.62709,46.695916)"
+       transform="matrix(1.3636362,0,0,1.3636362,205.52756,4.3755867)"
        id="g1477"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\supply.png"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\supplyfull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <g
@@ -698,8 +704,8 @@
     </g>
     <g
        id="g1519"
-       transform="matrix(1,0,0,1.0003545,250.26928,4.1614876)"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\submarine.png"
+       transform="matrix(1.3636362,0,0,1.3641196,198.22146,-53.625901)"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\submarinefull.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96">
       <g
@@ -752,13 +758,13 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.3499999px;line-height:1.25;font-family:Abel;-inkscape-font-specification:Abel;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="1.8281782"
-       y="263.2645"
+       x="-5.6553683"
+       y="312.28174"
        id="text942"><tspan
          sodipodi:role="line"
          id="tspan940"
-         x="1.8281782"
-         y="263.2645"
+         x="-5.6553683"
+         y="312.28174"
          style="stroke-width:0.26458332">Opponent Status:</tspan></text>
     <g
        inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Buttons\notready.png"
@@ -796,13 +802,32 @@
       </g>
     </g>
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.01266968;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.38091302;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
        id="rect950"
-       width="10.450007"
-       height="10.448962"
-       x="-36.2952"
-       y="137.12746"
-       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\gridsquare.png"
+       width="14.250009"
+       height="14.248584"
+       x="-118.00417"
+       y="247.78749"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Sprites\gridsquarefull.png"
+       inkscape:export-xdpi="94.479584"
+       inkscape:export-ydpi="94.479584" />
+    <rect
+       style="fill:#00ff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1.37572956;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect949"
+       width="144.14209"
+       height="144.14209"
+       x="-174.83379"
+       y="73.482849"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\gridspacefull.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <circle
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.83333331;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="path951"
+       cx="-22.66398"
+       cy="222.21307"
+       r="3.2740514"
+       inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\badattack.png"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96" />
   </g>

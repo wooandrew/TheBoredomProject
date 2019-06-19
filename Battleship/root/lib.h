@@ -20,7 +20,8 @@
 #include <fstream>			// main.cpp
 #include <thread>			// main.cpp
 #include <list>				// Game/game.h
-#include <atomic>			// Game/game.h
+#include <utility>			// Game/game.h
+#include <atomic>			// Game/game.h, Connect/connect.h
 #include <map>				// Graphics/text.h
 
 #include <GLEW/src/glew.h>

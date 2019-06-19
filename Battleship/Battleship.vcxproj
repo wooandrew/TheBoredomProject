@@ -167,6 +167,7 @@
     <ClCompile Include="root\Engine\Input\mouse.cpp" />
     <ClCompile Include="root\Engine\Math\math.cpp" />
     <ClCompile Include="root\Game\game.cpp" />
+    <ClCompile Include="root\Game\player.cpp" />
     <ClCompile Include="root\Graphics\sprite.cpp" />
     <ClCompile Include="root\Graphics\text.cpp" />
     <ClCompile Include="root\Graphics\texture.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="root\Engine\Input\mouse.h" />
     <ClInclude Include="root\Engine\Math\math.h" />
     <ClInclude Include="root\Game\game.h" />
+    <ClInclude Include="root\Game\player.h" />
     <ClInclude Include="root\Graphics\sprite.h" />
     <ClInclude Include="root\Graphics\text.h" />
     <ClInclude Include="root\Graphics\texture.h" />

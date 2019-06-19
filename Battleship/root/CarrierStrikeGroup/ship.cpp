@@ -4,7 +4,9 @@
 
 #include "ship.h"
 
-Ship::Ship(std::string path, ShipType _type, glm::vec3 _position, float _scale) : type(_type), defaultPosition(_position) {
+Ship::Ship() {}
+
+Ship::Ship(std::string path, ShipType _type, glm::vec3 _position, float _scale) {
 
 	iShip = Image(path, _position, _scale);
 	
@@ -15,9 +17,12 @@ Ship::Ship(std::string path, ShipType _type, glm::vec3 _position, float _scale) 
 	rect.y = _position.y - ((_scale * iShip.GetSize()->y) / 2);
 	rect.width = _scale * iShip.GetSize()->x;
 	rect.height = _scale * iShip.GetSize()->y;
+
+	type = _type;
+	defaultPosition = _position;
 }
 
-Ship::Ship(Image& _iShip, ShipType _type) : type(_type), defaultPosition(*_iShip.GetPosition()) {
+Ship::Ship(Image& _iShip, ShipType _type) {
 
 	iShip = _iShip;
 	
@@ -28,6 +33,9 @@ Ship::Ship(Image& _iShip, ShipType _type) : type(_type), defaultPosition(*_iShip
 	rect.y = iShip.GetPosition()->y - ((iShip.GetScale()->y * iShip.GetSize()->y) / 2);
 	rect.width = iShip.GetScale()->x * iShip.GetSize()->x;
 	rect.height = iShip.GetScale()->y * iShip.GetSize()->y;
+
+	type = _type;
+	defaultPosition = *_iShip.GetPosition();
 }
 
 void Ship::Update(Grid& _grid, bool setup) {
@@ -68,11 +76,12 @@ void Ship::Update(Grid& _grid, bool setup) {
 
 				for (unsigned int x = 0; x < _grid.GetGrid().size(); x++) {
 
-					Rect::XYWH r_gridSquare = _grid.GetGrid()[x].GetRect();
+					const Rect::XYWH r_GridSquare = _grid.GetGrid()[x].GetRect();
+					const Rect::XYWH r_GridSpace = _grid.GetGridSpace().second;
 
 					if ((mouseX < Engine::SCREEN_WIDTH) && (mouseX > 0) && (mouseY < Engine::SCREEN_HEIGHT) && (mouseY > 0) &&
-						(mouseX > r_gridSquare.x) && (static_cast<float>(mouseX) < r_gridSquare.x + r_gridSquare.width) &&
-						(mouseY > r_gridSquare.y) && (static_cast<float>(mouseY) < r_gridSquare.y + r_gridSquare.height)) {
+						(mouseX > r_GridSquare.x) && (static_cast<float>(mouseX) < r_GridSquare.x + r_GridSquare.width) &&
+						(mouseY > r_GridSquare.y) && (static_cast<float>(mouseY) < r_GridSquare.y + r_GridSquare.height)) {
 
 						if (static_cast<int>(*iShip.GetRotation()) == 90) {
 
@@ -93,21 +102,56 @@ void Ship::Update(Grid& _grid, bool setup) {
 							}
 						}
 						
+						PlacedId = _grid.GetGrid()[x].GetID();
+						
 						UpdateRect();
+
+						if ((rect.x <= r_GridSpace.x) || (rect.x + rect.width >= r_GridSpace.x + r_GridSpace.width) ||
+							(rect.y <= r_GridSpace.y) || (rect.y + rect.height >= r_GridSpace.y + r_GridSpace.height)) {
+							iShip.SetPosition(glm::vec3(Mouse::GetMouseX(), Mouse::GetMouseY(), 0));
+							break;
+						}
+
+						std::vector<GridSquare> tempGS;
 
 						for (const GridSquare tGridSquare : _grid.GetGrid()) {
 
 							if (rect.CheckCollisionAABB(tGridSquare.GetRect())) {
-								continue;
+
+								if (_grid.IsLegal(tGridSquare)) {
+									tempGS.push_back(tGridSquare);
+								}
+								else {
+
+									iShip.SetPosition(glm::vec3(Mouse::GetMouseX(), Mouse::GetMouseY(), 0));
+
+									selected = true;
+									placed = false;
+
+									goto ExitGridLoop;
+								}
 							}
+						}
+
+						if (type != ShipType::Submarine) {
+							
+							for (const GridSquare tGridSquare : tempGS) {
+								_grid.MakeIllegal(tGridSquare);
+							}
+						}
+						else {
+							_grid.MakeIllegal(tempGS[1]);
 						}
 						
 						selected = false;
 						placed = true;
 
-						return;
+					ExitGridLoop:
+
+						break;
 					}
 				}
+
 			}
 			else {
 				iShip.SetPosition(glm::vec3(Mouse::GetMouseX(), Mouse::GetMouseY(), 0));
@@ -123,14 +167,35 @@ void Ship::Update(Grid& _grid, bool setup) {
 
 				if (Mouse::ButtonDown(GLFW_MOUSE_BUTTON_LEFT)) {
 					selected = true;
+					placed = false;
+
+					for (const GridSquare tGridSquare : _grid.GetGrid()) {
+
+						if (rect.CheckCollisionAABB(tGridSquare.GetRect())) {
+							_grid.MakeLegal(tGridSquare);
+						}
+					}
 				}
 			}
 		}
 	}
+
+	
 }
 
 void Ship::Render() const {
 	iShip.Render();
+}
+
+void Ship::Reset() {
+
+	iShip.SetPosition(defaultPosition);
+	iShip.RotateTo(0);
+
+	UpdateRect();
+
+	selected = false;
+	placed = false;
 }
 
 void Ship::UpdateRect() {
@@ -151,6 +216,14 @@ void Ship::UpdateRect() {
 	}
 }
 
+Image* Ship::GetImage() {
+	return &iShip;
+}
+
 bool Ship::GetPlaced() const {
 	return placed;
+}
+
+std::string Ship::GetPlacedID() const {
+	return PlacedId;
 }

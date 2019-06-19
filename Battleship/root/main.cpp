@@ -7,6 +7,7 @@
 #include "lib.h"
 
 #include "Game/game.h"
+#include "Game/player.h"
 
 #include "Engine/engine.h"
 #include "Engine/Input/mouse.h"
@@ -27,7 +28,7 @@
  * Convention: type_commit_year
 **/
 
-constexpr auto build_version = "b8y19";
+constexpr auto build_version = "b9y19";
 
 int main() {
 
@@ -101,6 +102,8 @@ int main() {
 
 	// MiscGameObjects::GameState::PLAYGAME objects
 	Image pSetup("Assets/Screens/setup.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+	Image pPlay1("Assets/Screens/play.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+
 	Button readybutton("Assets/Buttons/readybutton.png", glm::vec3(90, 30, 0), 1.0f, false);
 	Button notreadybutton("Assets/Buttons/notreadybutton.png", glm::vec3(90, 30, 0), 1.0f, true);
 	Image ready("Assets/ready.png", glm::vec3(250, 138, 0));
@@ -115,8 +118,10 @@ int main() {
 	SetupDefaultPositions.push_back(glm::vec3(545, 355, 0));
 
 	CSG csg_setup(SetupDefaultPositions);
+	CSG full(SetupDefaultPositions, true);
 
 	Grid SetupGrid;
+	Grid PlayGrid(54);
 
 	// Game Objects
 	Player player1;
@@ -146,7 +151,10 @@ int main() {
 
 				homescreen.Render();
 				playbutton.Render();
-				exitbutton.Render();				
+				exitbutton.Render();
+
+				//pPlay1.Render();
+				//PlayGrid.Render(true);
 
 				break;
 			}
@@ -235,23 +243,7 @@ int main() {
 							SetupGrid.Render();
 
 							if (Connect::aRecvData != NULL) { // Parse Recieved Data
-								
-								std::vector<std::string> vaRecvData = Utilities::split(Connect::aRecvData.load());
-								for (std::string datum : vaRecvData) {
-									
-									if (datum == "host:not_ready") {
-										player1.Ready = false;
-									}
-									else if (datum == "host:ready") {
-										player1.Ready = true;
-									}
-									else if (datum == "p2:not_ready") {
-										player2.Ready = false;
-									}
-									else if (datum == "p2:ready") {
-										player2.Ready = true;
-									}
-								}
+								ParseRecvData((host ? player2 : player1), Connect::aRecvData.load());
 							}
 
 							if (host) { // If host
@@ -262,7 +254,7 @@ int main() {
 									readybutton.Render();
 
 									if (!player1.Ready) {
-										Connect::SendData(std::ref(gSocket), "host:not_ready");
+										Connect::SendData(std::ref(gSocket), "not_ready");
 									}
 								}
 								else { // Host is not ready
@@ -275,7 +267,17 @@ int main() {
 									}
 									
 									if (player1.Ready) {
-										Connect::SendData(std::ref(gSocket), "host:ready");
+
+										std::ostringstream stream;
+										stream << "ready&illegal_squares";
+
+										for (const GridSquare tGridSquare : SetupGrid.GetIllegalSquares()) {
+											stream << ":" << tGridSquare.GetID();
+										}
+
+										stream << "&placed_ids:" << csg_setup.GetPlacedIDs() << "&csg_rotations:" << csg_setup.GetRotations();
+
+										Connect::SendData(std::ref(gSocket), stream.str().c_str());
 									}
 								}
 
@@ -294,7 +296,7 @@ int main() {
 									readybutton.Render();
 
 									if (!player2.Ready) {
-										Connect::SendData(std::ref(gSocket), "p2:not_ready");
+										Connect::SendData(std::ref(gSocket), "not_ready");
 									}
 								}
 								else { // Player 2 is not ready
@@ -307,7 +309,17 @@ int main() {
 									}
 
 									if (player2.Ready) {
-										Connect::SendData(std::ref(gSocket), "p2:ready");
+
+										std::ostringstream stream;
+										stream << "ready&illegal_squares";
+
+										for (const GridSquare tGridSquare : SetupGrid.GetIllegalSquares()) {
+											stream << ":" << tGridSquare.GetID();
+										}
+
+										stream << "&placed_ids:" << csg_setup.GetPlacedIDs() << "&csg_rotations:" << csg_setup.GetRotations();
+
+										Connect::SendData(std::ref(gSocket), stream.str().c_str());
 									}
 								}
 
@@ -320,7 +332,17 @@ int main() {
 							}
 
 							if (player1.Ready && player2.Ready) {
+
 								PLAYSTATE = MGO::PlayState::P1TURN;
+
+								full.Assemble(PlayGrid, csg_setup.GetPlacedIDs(), csg_setup.GetRotations());
+
+								if (host) {
+									//player1.csg = csg_setup;
+								}
+								else {
+									//player2.csg = csg_setup;
+								}
 							}
 
 							csg_setup.Render();
@@ -329,11 +351,77 @@ int main() {
 						}
 						case MGO::PlayState::P1TURN:
 						{
+							pPlay1.Render();
+							PlayGrid.Update();
+
+							if (host) {
+
+								std::string PressedID = PlayGrid.GetPressedSquare();
+
+								for (const std::string ID : player2.ViableSquareIDs) {
+
+									if (PressedID != "NOPRESS") {
+
+										if (ID == PressedID) {
+											std::cout << "Hit! " << ID << std::endl;
+										}
+
+										PLAYSTATE = MGO::PlayState::P2TURN;
+										Connect::SendData(std::ref(gSocket), ("attack:" + PressedID).c_str());
+
+										break;
+									}
+								}
+							}
+							else {
+
+								full.Render();
+
+								std::pair<std::string, std::string> RecvParsePair = ParseRecvData(Connect::aRecvData.load());
+
+								if (RecvParsePair.first == "attack") {
+									PLAYSTATE = MGO::PlayState::P2TURN;
+									Connect::aRecvData = "";
+								}
+							}
 
 							break;
 						}
 						case MGO::PlayState::P2TURN:
 						{
+							pPlay1.Render();
+							PlayGrid.Update();
+
+							if (!host) {
+
+								std::string PressedID = PlayGrid.GetPressedSquare();
+
+								for (const std::string ID : player1.ViableSquareIDs) {
+									
+									if (PressedID != "NOPRESS") {
+
+										if (ID == PressedID) {
+											std::cout << "Hit! " << ID << std::endl;
+										}
+
+										PLAYSTATE = MGO::PlayState::P1TURN;
+										Connect::SendData(std::ref(gSocket), ("attack:" + PressedID).c_str());
+
+										break;
+									}
+								}
+							}
+							else {
+
+								full.Render();
+
+								std::pair<std::string, std::string> RecvParsePair = ParseRecvData(Connect::aRecvData.load());
+
+								if (RecvParsePair.first == "attack") {
+									PLAYSTATE = MGO::PlayState::P1TURN;
+									Connect::aRecvData = "";
+								}
+							}
 
 							break;
 						}
@@ -363,7 +451,15 @@ int main() {
 				tRecvLoop = std::thread();
 
 				CURRENTSTATE = MGO::GameState::HOMESCREEN;
+				
 				connected = false;
+				connecting = false;
+
+				player1.Ready = false;
+				player2.Ready = false;
+
+				SetupGrid.Reset();
+				csg_setup.Reset();
 
 				break;
 			}
@@ -395,10 +491,6 @@ int main() {
 
 	if (retSocket.valid()) {
 		retSocket.get();
-		retSocket.~future();
-	}
-	else {
-		retSocket.~future();
 	}
 
 	if (tRecvLoop.joinable()) {
@@ -406,7 +498,7 @@ int main() {
 	}
 
 	Utilities::Logger("002x", "PROGRAM TERMINATED.");
-	//log.close(); // Remove __ RAII
+	//log.close(); // Remove 'cause RAII
 
 	return 0;
 }

@@ -20,7 +20,7 @@ namespace Connect {
 
 	template<typename DATA>
 	int SendData(SOCKET& gSocket, DATA senddata) {
-
+		
 		const char* data = static_cast<const char*>(senddata);
 
 		int iResult = send(gSocket, data, strlen(data), 0);

@@ -31,14 +31,19 @@ class Ship {
 
 public:
 
+	Ship();
 	Ship(std::string path, ShipType _type, glm::vec3 _position, float _scale = 1.0f);
 	Ship(Image& _iShip, ShipType _type);
 
 	void Update(Grid& _grid, bool setup = false);
 	void Render() const;
+	void Reset();
 
 	void UpdateRect();
+
+	Image* GetImage();
 	bool GetPlaced() const;
+	std::string GetPlacedID() const;
 
 private:
 
@@ -47,11 +52,12 @@ private:
 	bool selected;
 	bool placed;
 
+	std::string PlacedId;
+
 	Rect::XYWH rect;
 
-	const ShipType type;
-	const glm::vec3 defaultPosition;
+	ShipType type;
+	glm::vec3 defaultPosition;
 };
 
 #endif // !CSG_SHIP
-
