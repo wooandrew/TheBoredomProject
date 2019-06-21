@@ -293,6 +293,7 @@ namespace Connect {
 			if (iResult > 0) {
 
 				srecvbuf = recvbuf;
+				aRecvData.store(srecvbuf.c_str());
 
 				if (srecvbuf == "exit") {
 
@@ -325,7 +326,7 @@ namespace Connect {
 				}
 			}
 
-			aRecvData = srecvbuf.c_str();
+			//aRecvData = srecvbuf.c_str();
 
 		} while (recvRun);
 

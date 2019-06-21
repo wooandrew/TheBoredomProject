@@ -46,7 +46,7 @@ class Grid {
 
 public:
 
-	Grid(int GridSize = 40);
+	Grid(float GridSize = 40);
 
 	void Update();
 	void Render(bool debug = false) const; // Debug

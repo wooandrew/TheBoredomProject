@@ -43,12 +43,12 @@ bool operator==(const GridSquare& left, const GridSquare& right) {
 	return false;
 }
 
-Grid::Grid(int GridSize) {
+Grid::Grid(float GridSize) {
 
 	const char* pGridSpace = "Assets/gridspace.png";
 	const char* pGridSquare = "Assets/gridsquare.png";
 
-	if (GridSize == 54) {
+	if (GridSize == 54.5) {
 		pGridSpace = "Assets/gridspacefull.png";
 		pGridSquare = "Assets/gridsquarefull.png";
 	}
@@ -62,8 +62,8 @@ Grid::Grid(int GridSize) {
 
 	GridSpace = std::make_pair(iGridSpace, GSRect);
 
-	float x = std::floor(static_cast<float>(GridSize / 2));
-	float y = 600 - std::floor(static_cast<float>(GridSize / 2));
+	float x = GridSize / 2;
+	float y = 600 - (GridSize / 2);
 
 	char rows[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' };
 	char cols[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
@@ -78,7 +78,7 @@ Grid::Grid(int GridSize) {
 		if (z % 10 == 0) {
 
 			y -= GridSize;
-			x = std::floor(static_cast<float>(GridSize / 2));
+			x = GridSize / 2;
 
 			baseRow = rows[br];
 			br++;
@@ -87,10 +87,10 @@ Grid::Grid(int GridSize) {
 		x += GridSize;
 		baseCol = cols[z % 10];
 
-		std::stringstream _id;
+		std::ostringstream _id;
 		_id << baseRow << baseCol;
 
-		vGrid.push_back(GridSquare(pGridSquare, _id.str(), glm::vec3(x + ((GridSize == 54) ? 2 : 0), y - ((GridSize == 54) ? 2 : 0), 0)));
+		vGrid.push_back(GridSquare(pGridSquare, _id.str(), glm::vec3(x, y, 0)));
 	}
 }
 

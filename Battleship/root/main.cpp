@@ -121,7 +121,7 @@ int main() {
 	CSG full(SetupDefaultPositions, true);
 
 	Grid SetupGrid;
-	Grid PlayGrid(54);
+	Grid PlayGrid(54.5);
 
 	// Game Objects
 	Player player1;
@@ -152,9 +152,6 @@ int main() {
 				homescreen.Render();
 				playbutton.Render();
 				exitbutton.Render();
-
-				//pPlay1.Render();
-				//PlayGrid.Render(true);
 
 				break;
 			}
@@ -381,7 +378,7 @@ int main() {
 
 								if (RecvParsePair.first == "attack") {
 									PLAYSTATE = MGO::PlayState::P2TURN;
-									Connect::aRecvData = "";
+									Connect::aRecvData.store("");
 								}
 							}
 
@@ -419,7 +416,7 @@ int main() {
 
 								if (RecvParsePair.first == "attack") {
 									PLAYSTATE = MGO::PlayState::P1TURN;
-									Connect::aRecvData = "";
+									Connect::aRecvData.store("");
 								}
 							}
 
