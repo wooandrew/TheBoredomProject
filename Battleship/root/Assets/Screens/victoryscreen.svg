@@ -16,7 +16,7 @@
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
    sodipodi:docname="victoryscreen.svg"
-   inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Screens\homescreen.png"
+   inkscape:export-filename="C:\Users\Andrew\Documents\Projects\TheBoredomProject\Battleship\root\Assets\Screens\p2victoryscreen.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
   <defs
@@ -254,7 +254,7 @@
          id="tspan843"
          x="35.136528"
          y="242.97597"
-         style="stroke-width:0.26458332">PLAYER 1 VICTORY!</tspan></text>
+         style="stroke-width:0.26458332">PLAYER 2 VICTORY!</tspan></text>
     <rect
        y="246.36568"
        x="45.735119"

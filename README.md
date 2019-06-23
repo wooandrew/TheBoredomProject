@@ -1,4 +1,4 @@
-<img sytle="width:100%" src="https://www.dropbox.com/s/moco159cewwdijb/theboredomproject.png?raw=1" />
+<img sytle="width:100%" src="https://www.dropbox.com/s/s69s910ezsr5hwc/theboredomproject_battleship.png?raw=1" />
 
 <div style="width:100%;display:flex;justify-content:center;">
 <a src="https://wooandrew.github.io/projects/theboredomproject/theboredomproject.htm"><img alt="Website" src="https://img.shields.io/website/https/wooandrew.github.io/projects/theboredomproject/theboredomproject.htm.svg"></a>
@@ -11,20 +11,19 @@
 <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/wooandrew/TheBoredomProject.svg">
 </div>
 
-# The Boredom Project
-The Boredom Project is just as the name suggests: a project, or a multitude of projects, born from boredom. Everything here is spontaneous, random, and probably small, unlike many of my other projects. In other words, it's the result of a 17-year-old without friends or a life.
+# The Boredom Project: Battleship
+`The Boredom Project: Battleship` is my recreation of the classic grid game Battleship. As of June 22, 2019, Battleship is likely to recieve updates.
 
-|Project    |Language                                                     |Status                                                                   |Updates?                                                 |GitHub Release?                                          |                        |
-|:---------:|:-----------------------------------------------------------:|:-----------------------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|:-----------------------|
-|Pong       |![python](https://img.shields.io/badge/-Python-%233572a5.svg)|![done](https://img.shields.io/badge/-Done-success.svg)                  |![maybe](https://img.shields.io/badge/-Maybe-yellow.svg) |![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|`-> Tag: v1.0-pong     `|
-|Tic Tac Toe|![python](https://img.shields.io/badge/-Python-%233572a5.svg)|![done](https://img.shields.io/badge/-Done-success.svg)                  |![no](https://img.shields.io/badge/-No-red.svg)          |![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|`-> Tag: v1.0-tictactoe`|
-|Battleship |![cpp](https://img.shields.io/badge/-C%2B%2B-%23f34b7d.svg)  |![prerelease](https://img.shields.io/badge/-Pre--Release-yellowgreen.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|![no](https://img.shields.io/badge/-No-red.svg)          |`                      `|
-<!-- ![build](https://img.shields.io/badge/-Build-blueviolet.svg) -->
+|Project   |Language                                                   |Status                                                                   |Updates?                                                 |GitHub Release?                                          |                           |
+|:--------:|:---------------------------------------------------------:|:-----------------------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------:|
+|Battleship|![cpp](https://img.shields.io/badge/-C%2B%2B-%23f34b7d.svg)|![prerelease](https://img.shields.io/badge/-Pre--Release-yellowgreen.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|![no](https://img.shields.io/badge/-No-red.svg)          |`                     `|
+
+
 ### Disclaimer
 These projects are BOREDOM inspired projects. So, depending on how bored I am, I may pump out several projects in a week. I might also be pre-occupied and not post a single project in several months (or years). So don't go expecting to see new stuff every month or even every day. Also, none of the projects here are subject to updates or bug fixes. I MAY fix bugs or add features, but don't count on it. OK, I'm done rambling. Check out my Boredom Projects, and for the love of something, use proper grammar.
 
 ## License
-<a rel="license" href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://cloud.githubusercontent.com/assets/5456665/18950087/fbe0681a-865f-11e6-9552-e59d038d5913.png" width="60em" height=auto/></a><br/><a href="https://github.com/wooandrew/TheBoredomProject">The Boredom Project</a> is licensed under the <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+<a rel="license" href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://cloud.githubusercontent.com/assets/5456665/18950087/fbe0681a-865f-11e6-9552-e59d038d5913.png" width="60em" height=auto/></a><br/><a href="https://github.com/wooandrew/TheBoredomProject/tree/Battleship">The Boredom Project: Battleship</a> is licensed under the <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
 ```
 MIT License
 
