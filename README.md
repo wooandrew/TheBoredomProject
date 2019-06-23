@@ -16,7 +16,7 @@
 
 |Project   |Language                                                   |Status                                                                   |Updates?                                                 |GitHub Release?                                          |                           |
 |:--------:|:---------------------------------------------------------:|:-----------------------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------------------------------------:|:-------------------------:|
-|Battleship|![cpp](https://img.shields.io/badge/-C%2B%2B-%23f34b7d.svg)|![prerelease](https://img.shields.io/badge/-Pre--Release-yellowgreen.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|![no](https://img.shields.io/badge/-No-red.svg)          |`                     `|
+|Battleship|![cpp](https://img.shields.io/badge/-C%2B%2B-%23f34b7d.svg)|![prerelease](https://img.shields.io/badge/-Pre--Release-yellowgreen.svg)|![yes](https://img.shields.io/badge/-Yes-brightgreen.svg)|![no](https://img.shields.io/badge/-No-red.svg)          |`-> Tag: v1.0-battleship-pre.1`|
 
 
 ### Disclaimer
