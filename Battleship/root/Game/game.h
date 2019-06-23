@@ -20,6 +20,7 @@ class GridSquare {
 
 public:
 
+	GridSquare();
 	GridSquare(std::string path, std::string _id, glm::vec3 _position, float _scale = 1.0f);
 
 	void Render() const;
@@ -36,9 +37,6 @@ private:
 
 	Image iGridSquare;
 	Rect::XYWH rect;
-
-protected:
-
 	const std::string id;
 };
 
@@ -59,7 +57,7 @@ public:
 	std::vector<GridSquare> GetGrid() const;
 	std::pair<Image, Rect::XYWH> GetGridSpace() const;
 	std::list<GridSquare> GetIllegalSquares() const;
-	std::string GetPressedSquare() const;
+	GridSquare GetPressedSquare() const;
 	
 	friend void PrintIllegalSquares(Grid _grid); // Debug
 
@@ -67,10 +65,41 @@ private:
 
 	std::vector<GridSquare> vGrid;
 	std::pair<Image, Rect::XYWH> GridSpace;
-
-protected:
-
 	std::list<GridSquare> IllegalSquares;
+};
+
+class Pin {
+
+public:
+
+	Pin(GridSquare gs, bool _hit = false);
+
+	void Render() const;
+
+private:
+
+	Image iPin;
+	const std::string GridSquareID;
+};
+
+struct Attack {
+
+	Attack();
+
+	void Render();
+	void Reset();
+
+	void AttackSquare(GridSquare _gridsquare, bool goodhit = false);
+
+	int GetGoodHitNum() const;
+	std::vector<GridSquare> GetAttacked() const;
+
+private:
+
+	int goodhitnum;
+
+	std::vector<GridSquare> Attacked;
+	std::vector<Pin> pins;
 };
 
 namespace MiscGameObjects {
@@ -82,6 +111,7 @@ namespace MiscGameObjects {
 		CONNECTFAIL,
 		PLAYGAME,
 		GAMEOVER,
+		RESET,
 		EXIT
 	};
 
@@ -96,5 +126,7 @@ namespace MGO = MiscGameObjects;
 
 std::pair<std::string, std::string> ParseRecvData(const char* ccRecvData);
 void ParseRecvData(Player& player, const char* ccRecvData);
+
+GridSquare IDtoGR(Grid& _grid, std::string _id);
 
 #endif // !BATTLESHIP_GAME

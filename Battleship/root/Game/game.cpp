@@ -4,6 +4,9 @@
 
 #include "game.h"
 
+#pragma warning(disable: 26495)
+GridSquare::GridSquare() : id("NULL") { }
+
 GridSquare::GridSquare(std::string path, std::string _id, glm::vec3 _position, float _scale) : id(_id) {
 
 	iGridSquare = Image(path, _position, _scale);
@@ -170,7 +173,7 @@ std::list<GridSquare> Grid::GetIllegalSquares() const {
 	return IllegalSquares;
 };
 
-std::string Grid::GetPressedSquare() const {
+GridSquare Grid::GetPressedSquare() const {
 
 	for (unsigned int x = 0; x < vGrid.size(); x++) {
 
@@ -184,11 +187,11 @@ std::string Grid::GetPressedSquare() const {
 			(mouseY > rect.y) && (static_cast<float>(mouseY) < rect.y + rect.height)) {
 
 			if (Mouse::ButtonIsPressed(GLFW_MOUSE_BUTTON_LEFT)) {
-				return vGrid[x].GetID();
+				return vGrid[x];
 			}
 		}
 	}
-	return "NOPRESS";
+	return GridSquare();
 }
 
 void PrintIllegalSquares(Grid _grid) { // Debug Function
@@ -197,6 +200,63 @@ void PrintIllegalSquares(Grid _grid) { // Debug Function
 		std::cout << tGridSquare.GetID() << std::endl;
 	}
 	std::cout << "-----" << std::endl;
+}
+
+Pin::Pin(GridSquare gs, bool _hit) : GridSquareID(gs.GetID()) {
+
+	if (_hit) {
+		iPin = Image("Assets/goodattack.png", *gs.GetPosition(), 1.0f);
+	}
+	else {
+		iPin = Image("Assets/badattack.png", *gs.GetPosition(), 1.0f);
+	}
+}
+
+void Pin::Render() const {
+	iPin.Render();
+}
+
+Attack::Attack() {
+	goodhitnum = 0;
+}
+
+void Attack::Render() {
+
+	for (const Pin pin : pins) {
+		pin.Render();
+	}
+}
+
+void Attack::Reset() {
+
+	Attacked.clear();
+	pins.clear();
+	goodhitnum = 0;
+}
+
+void Attack::AttackSquare(GridSquare _gridsquare, bool goodhit) {
+	
+	for (const GridSquare gs : Attacked) {
+
+		if (gs == _gridsquare) {
+			return;
+		}
+	}
+
+	Attacked.push_back(_gridsquare);
+	pins.push_back(Pin(_gridsquare, goodhit));
+
+	if (goodhit) {
+		goodhitnum++;
+	}
+}
+
+int Attack::GetGoodHitNum() const {
+	return goodhitnum;
+}
+
+std::vector<GridSquare> Attack::GetAttacked() const {
+	return Attacked;
 }
 
 std::pair<std::string, std::string> ParseRecvData(const char* ccRecvData) {
@@ -255,4 +315,16 @@ void ParseRecvData(Player& player, const char* ccRecvData) {
 			}
 		}
 	}
+}
+
+GridSquare IDtoGR(Grid& _grid, std::string _id) {
+
+	for (const GridSquare gs : _grid.GetGrid()) {
+
+		if (gs.GetID() == _id) {
+			return gs;
+		}
+	}
+
+	return GridSquare();
 }

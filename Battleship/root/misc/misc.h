@@ -60,6 +60,28 @@ namespace Utilities {
 		return ret;
 	}
 
+	struct DebugConsole {
+
+		DebugConsole() = delete;
+
+		static void EnableShowHide();
+		static void e_s_h();
+
+		static void DisableShowHide();
+		static void d_s_h();
+
+		static void AutoShowHide();
+		static void a_s_h();
+
+		static void Hide();
+		static void Show();
+
+	private:
+
+		static bool hidden;
+		static bool showhide;
+	};
+
 	struct DeltaTime {
 
 		DeltaTime() = delete;

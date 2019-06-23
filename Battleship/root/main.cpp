@@ -28,24 +28,33 @@
  * Convention: type_commit_year
 **/
 
-constexpr auto build_version = "b9y19";
+constexpr auto build_version = "b11y19";
+constexpr bool debug = false;
 
 int main() {
 
 	// *** Event Log *** START ******************************************** *** //
 	system("TITLE Battleship Debug Console");
-	//std::string logname = "battleship.logx";
-	//std::ifstream gameLogExist(logname);
-	//if (!gameLogExist) {
-	//
-	//	std::ofstream log(logname);
-	//	log << logname << " | Battleship GAME LOG generated @ " << Utilities::GetDateTime() << std::endl;
-	//	log.close();
-	//}
-	//gameLogExist.close();
-	//
-	//std::ofstream log(logname, std::ios_base::app);
-	//std::cerr.rdbuf(log.rdbuf());
+
+	if (!debug) {
+		Utilities::DebugConsole::Hide();
+	}
+	else {
+		Utilities::DebugConsole::DisableShowHide();
+	}
+
+	std::string logname = "battleship.logx";
+	std::ifstream gameLogExist(logname);
+	if (!gameLogExist) {
+	
+		std::ofstream log(logname);
+		log << logname << " | Battleship GAME LOG generated @ " << Utilities::GetDateTime() << std::endl;
+		log.close();
+	}
+	gameLogExist.close();
+	
+	std::ofstream log(logname, std::ios_base::app);
+	std::cerr.rdbuf(log.rdbuf());
 	
 	std::stringstream stream;
 	stream << "----------------------------------------------------------------------------------------------------------------- " << build_version << " ----";
@@ -70,7 +79,6 @@ int main() {
 	bool host = false;
 	bool connected = false;
 	bool connecting = false;
-	bool fDisconnect = false;
 	// *** Pseudo-Global Variables *** END ******************************** *** //
 
 	// *** Connection Initializer *** START ******************************* *** //
@@ -92,6 +100,7 @@ int main() {
 	Button playbutton("Assets/Buttons/playbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 100, 0), 0.6f, MGO::GameState::TRYCONNECT, true);
 	Button exitbutton("Assets/Buttons/exitbutton.png", glm::vec3(Engine::SCREEN_WIDTH + 130, 40, 0), 0.6f, MGO::GameState::EXIT, true);
 	Button backbutton("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, MGO::GameState::HOMESCREEN, true);
+	Button backbuttonv("Assets/Buttons/backbutton.png", glm::vec3(-130, Engine::SCREEN_HEIGHT - 49, 0), 0.6f, MGO::GameState::RESET, true);
 
 	// MiscGameObjects::GameState::TRYCONNECT objects
 	Image connectscreen("Assets/Screens/connectscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
@@ -123,18 +132,31 @@ int main() {
 	Grid SetupGrid;
 	Grid PlayGrid(54.5);
 
-	// Game Objects
+	Attack p1attacks;
+	Attack p2attacks;
+
+	// Player Data
 	Player player1;
 	Player player2;
 
 	player1.Ready = false;
 	player2.Ready = false;
 
+	std::string winner = "";
+
+	// MiscGameObjects::GameState::GAMEOVER objects
+	Image p1victory("Assets/Screens/p1victoryscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+	Image p2victory("Assets/Screens/p2victoryscreen.png", glm::vec3(Engine::SCREEN_WIDTH / 2, Engine::SCREEN_HEIGHT / 2, 0));
+
 	// *** Main Loop *** START *** **************************************** *** //
 	while (run) {
 
 		if (glfwWindowShouldClose(engine.GetWindow())) {
 			CURRENTSTATE = MGO::GameState::EXIT;
+		}
+
+		if (Keyboard::KeyDown(GLFW_KEY_GRAVE_ACCENT)) {
+			Utilities::DebugConsole::AutoShowHide();
 		}
 
 		// Update Events
@@ -146,6 +168,8 @@ int main() {
 
 			case MGO::GameState::HOMESCREEN:
 			{
+				winner = "";
+
 				CURRENTSTATE = playbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
 				CURRENTSTATE = exitbutton.Update(CURRENTSTATE, Engine::SCREEN_WIDTH + 130, Engine::SCREEN_WIDTH - 65);
 
@@ -331,15 +355,9 @@ int main() {
 							if (player1.Ready && player2.Ready) {
 
 								PLAYSTATE = MGO::PlayState::P1TURN;
-
 								full.Assemble(PlayGrid, csg_setup.GetPlacedIDs(), csg_setup.GetRotations());
 
-								if (host) {
-									//player1.csg = csg_setup;
-								}
-								else {
-									//player2.csg = csg_setup;
-								}
+								std::this_thread::sleep_for(std::chrono::seconds(2));
 							}
 
 							csg_setup.Render();
@@ -353,22 +371,34 @@ int main() {
 
 							if (host) {
 
-								std::string PressedID = PlayGrid.GetPressedSquare();
+								GridSquare PressedGridSquare = PlayGrid.GetPressedSquare();
+								bool AlreadyAttacked = false;
 
-								for (const std::string ID : player2.ViableSquareIDs) {
-
-									if (PressedID != "NOPRESS") {
-
-										if (ID == PressedID) {
-											std::cout << "Hit! " << ID << std::endl;
-										}
-
-										PLAYSTATE = MGO::PlayState::P2TURN;
-										Connect::SendData(std::ref(gSocket), ("attack:" + PressedID).c_str());
-
+								for (const GridSquare gs : p1attacks.GetAttacked()) {
+									
+									if (gs == PressedGridSquare) {
+										AlreadyAttacked = true;
 										break;
 									}
 								}
+
+								if (PressedGridSquare.GetID() != "NULL" && !AlreadyAttacked) {
+
+									for (const std::string ID : player2.ViableSquareIDs) {
+
+										if (ID == PressedGridSquare.GetID()) {
+											p1attacks.AttackSquare(PressedGridSquare, true);
+											break;
+										}
+									}
+
+									p1attacks.AttackSquare(PressedGridSquare);
+
+									PLAYSTATE = MGO::PlayState::P2TURN;
+									Connect::SendData(std::ref(gSocket), ("attack:" + PressedGridSquare.GetID()).c_str());
+								}
+
+								p1attacks.Render();
 							}
 							else {
 
@@ -377,8 +407,25 @@ int main() {
 								std::pair<std::string, std::string> RecvParsePair = ParseRecvData(Connect::aRecvData.load());
 
 								if (RecvParsePair.first == "attack") {
+
 									PLAYSTATE = MGO::PlayState::P2TURN;
 									Connect::aRecvData.store("");
+
+									p1attacks.AttackSquare(IDtoGR(PlayGrid, RecvParsePair.second), !SetupGrid.IsLegal(IDtoGR(SetupGrid, RecvParsePair.second)));
+								}
+
+								p1attacks.Render();
+							}
+
+							if (p1attacks.GetGoodHitNum() == 18 || p2attacks.GetGoodHitNum() == 18) {
+
+								CURRENTSTATE = MGO::GameState::GAMEOVER;
+
+								if (p1attacks.GetGoodHitNum() == 18) {
+									winner = "p1";
+								}
+								else {
+									winner = "p2";
 								}
 							}
 
@@ -391,22 +438,34 @@ int main() {
 
 							if (!host) {
 
-								std::string PressedID = PlayGrid.GetPressedSquare();
+								GridSquare PressedGridSquare = PlayGrid.GetPressedSquare();
+								bool AlreadyAttacked = false;
 
-								for (const std::string ID : player1.ViableSquareIDs) {
-									
-									if (PressedID != "NOPRESS") {
+								for (const GridSquare gs : p2attacks.GetAttacked()) {
 
-										if (ID == PressedID) {
-											std::cout << "Hit! " << ID << std::endl;
-										}
-
-										PLAYSTATE = MGO::PlayState::P1TURN;
-										Connect::SendData(std::ref(gSocket), ("attack:" + PressedID).c_str());
-
+									if (gs == PressedGridSquare) {
+										AlreadyAttacked = true;
 										break;
 									}
 								}
+
+								if (PressedGridSquare.GetID() != "NULL" && !AlreadyAttacked) {
+
+									for (const std::string ID : player1.ViableSquareIDs) {
+
+										if (ID == PressedGridSquare.GetID()) {
+											p2attacks.AttackSquare(PressedGridSquare, true);
+											break;
+										}
+									}
+
+									p2attacks.AttackSquare(PressedGridSquare);
+
+									PLAYSTATE = MGO::PlayState::P1TURN;
+									Connect::SendData(std::ref(gSocket), ("attack:" + PressedGridSquare.GetID()).c_str());
+								}
+
+								p2attacks.Render();
 							}
 							else {
 
@@ -415,8 +474,25 @@ int main() {
 								std::pair<std::string, std::string> RecvParsePair = ParseRecvData(Connect::aRecvData.load());
 
 								if (RecvParsePair.first == "attack") {
+
 									PLAYSTATE = MGO::PlayState::P1TURN;
 									Connect::aRecvData.store("");
+
+									p2attacks.AttackSquare(IDtoGR(PlayGrid, RecvParsePair.second), !SetupGrid.IsLegal(IDtoGR(SetupGrid, RecvParsePair.second)));
+								}
+
+								p2attacks.Render();
+							}
+
+							if (p1attacks.GetGoodHitNum() == 18 || p2attacks.GetGoodHitNum() == 18) {
+
+								CURRENTSTATE = MGO::GameState::GAMEOVER;
+
+								if (p1attacks.GetGoodHitNum() == 18) {
+									winner = "p1";
+								}
+								else {
+									winner = "p2";
 								}
 							}
 
@@ -431,12 +507,49 @@ int main() {
 				}
 				else {
 					CURRENTSTATE = MGO::GameState::GAMEOVER;
-					fDisconnect = true;
 				}
 
 				break;
 			}
 			case MGO::GameState::GAMEOVER:
+			{
+				if (!host) {
+
+					std::pair<std::string, std::string> temp = ParseRecvData(Connect::aRecvData.load());
+
+					if (temp.first == "winner") {
+						winner = temp.second;
+					}
+				}
+
+				if (winner == "p1") {
+					CURRENTSTATE = backbuttonv.Update(CURRENTSTATE, -130, 95);
+					p1victory.Render();
+				}
+				else if (winner == "p2") {
+					CURRENTSTATE = backbuttonv.Update(CURRENTSTATE, -130, 95);
+					p2victory.Render();
+				}
+				else {
+
+					CURRENTSTATE = backbuttonv.Update(CURRENTSTATE, -130, 95);
+
+					if (p1attacks.GetGoodHitNum() == 18 || p2attacks.GetGoodHitNum() == 18) {
+
+						if (p1attacks.GetGoodHitNum() == 18) {
+							winner = "p1";
+						}
+						else {
+							winner = "p2";
+						}
+					}
+				}
+
+				backbuttonv.Render();
+
+				break;
+			}
+			case MGO::GameState::RESET:
 			{
 				if (gSocket != INVALID_SOCKET) {
 					Connect::disconnect(std::ref(gSocket));
@@ -448,15 +561,24 @@ int main() {
 				tRecvLoop = std::thread();
 
 				CURRENTSTATE = MGO::GameState::HOMESCREEN;
-				
+				PLAYSTATE = MGO::PlayState::SETUP;
+
 				connected = false;
 				connecting = false;
 
 				player1.Ready = false;
 				player2.Ready = false;
 
+				p1attacks.Reset();
+				p2attacks.Reset();
+
 				SetupGrid.Reset();
 				csg_setup.Reset();
+
+				PlayGrid.Reset();
+				full.Reset();
+
+				Connect::aRecvData.store("");
 
 				break;
 			}
